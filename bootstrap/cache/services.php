@@ -28,9 +28,10 @@
     24 => 'App\\Providers\\AuthServiceProvider',
     25 => 'App\\Providers\\EventServiceProvider',
     26 => 'App\\Providers\\RouteServiceProvider',
-    27 => 'Collective\\Html\\HtmlServiceProvider',
-    28 => 'Intervention\\Image\\ImageServiceProvider',
-    29 => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    28 => 'Collective\\Html\\HtmlServiceProvider',
+    29 => 'Intervention\\Image\\ImageServiceProvider',
+    30 => 'Laravel\\Socialite\\SocialiteServiceProvider',
   ),
   'eager' => 
   array (
@@ -48,7 +49,8 @@
     11 => 'App\\Providers\\AuthServiceProvider',
     12 => 'App\\Providers\\EventServiceProvider',
     13 => 'App\\Providers\\RouteServiceProvider',
-    14 => 'Intervention\\Image\\ImageServiceProvider',
+    14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    15 => 'Intervention\\Image\\ImageServiceProvider',
   ),
   'deferred' => 
   array (
