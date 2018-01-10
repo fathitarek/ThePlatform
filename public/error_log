@@ -1,0 +1,3 @@
+[01-Nov-2017 06:19:20 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[01-Nov-2017 06:19:27 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[05-Nov-2017 10:01:06 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/HomeController.php on line 231
