@@ -2,12 +2,6 @@
     <link href="<?php echo e(asset('css/styleUploadFileFacebook.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/styleuploadcsv_statusbrew.css')); ?>" rel="stylesheet">
     
-<style>
-
-
-</style>
-
-
     <body>
 
     <div class="container">
