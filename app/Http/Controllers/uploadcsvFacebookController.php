@@ -15,7 +15,7 @@ class uploadcsvFacebookController extends Controller {
      */
     public function import(uploadcsvFacebookRequest $request) {
         $input = $request->all();
-        dd($input);
+       // dd($input);
         $AppUsersPosts = new AppUsersPosts();
         $destination = public_path() . '/excel_imported_files'; // upload path
 

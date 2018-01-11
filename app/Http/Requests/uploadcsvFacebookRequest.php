@@ -15,7 +15,7 @@ class uploadcsvFacebookRequest extends FormRequest
     {
         return true;
     }
-
+//|mimes:csv
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +25,7 @@ class uploadcsvFacebookRequest extends FormRequest
     {
 
         return [
-            'csv_file' => 'required|mimes:csv',
+            'csv_file' => 'required',
         ];
     }
     public function messages() {

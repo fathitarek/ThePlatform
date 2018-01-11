@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <link href="<?php echo e(asset('css/styleUploadFileFacebook.css')); ?>" rel="stylesheet">
-    <link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">
+    <link href="<?php echo e(asset('css/styleuploadcsv_statusbrew.css')); ?>" rel="stylesheet">
+    
 <style>
 
 
