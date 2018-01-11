@@ -1,6 +1,8 @@
 @extends('home.layouts.app')
 @section('content')
-<body>
+    <link href="{{ asset('css/styleUploadFileFacebook.css') }}" rel="stylesheet">
+
+    <body>
 
     <div class="container">
         @if (session('sucess'))
@@ -14,18 +16,19 @@
         </div>
         @endif
         <div>
-            <div _ngcontent-c25="" class="layout-padding" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
-                <span _ngcontent-c25="" class="step-count" fxlayout="" fxlayoutalign="center center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center; align-items: center;">1</span>
-                <span _ngcontent-c25="" translate="">Choose Profile</span>
-            </div>
-            <span _ngcontent-c25="" class="step-subhead" translate="">Tell us for which profile you want to upload the CSV</span>
-            <div _ngcontent-c25="" style="height:20px;"></div>
-            <form method="post" action="{{ url('/facebook/csv') }}" enctype="multipart/form-data">
-                <select>
-                    <option value=""> Choose Account</option>
-                    <option>myacc</option>
-                </select>
+
                 <div _ngcontent-c25="" class="step choose-type">
+                    <div _ngcontent-c25="" class="layout-padding" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
+                        <span _ngcontent-c25="" class="step-count" fxlayout="" fxlayoutalign="center center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center; align-items: center;">1</span>
+                        <span _ngcontent-c25="" translate="">Choose Profile</span>
+                    </div>
+                    <span _ngcontent-c25="" class="step-subhead" translate="">Tell us for which profile you want to upload the CSV</span>
+                    <div _ngcontent-c25="" style="height:20px;"></div>
+                    <form method="post" action="{{ url('/facebook/csv') }}" enctype="multipart/form-data">
+                        <select>
+                            <option value=""> Choose Account</option>
+                            <option>myacc</option>
+                        </select>
                     <div _ngcontent-c25="" class="layout-padding" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
                         <span _ngcontent-c25="" class="step-count" fxlayout="" fxlayoutalign="center center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center; align-items: center;">2</span>
                         <span _ngcontent-c25="" translate="">Choose from the following csv formats to upload</span>
