@@ -1,5 +1,30 @@
 <?php $__env->startSection('content'); ?>
     <link href="<?php echo e(asset('css/styleUploadFileFacebook.css')); ?>" rel="stylesheet">
+    <link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">
+<style>
+
+    .mat-radio-outer-circle {
+        box-sizing: border-box;
+        height: 20px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: border-color ease 280ms;
+        width: 20px;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 50%;
+    }
+    .mat-radio-button.mat-accent .mat-radio-inner-circle {
+        background-color: #448aff;
+    }
+    .mat-radio-checked .mat-radio-inner-circle {
+        transform: scale(.5);
+    }
+    .mat-radio-button{display:inline-block}.mat-radio-label{cursor:pointer;display:inline-flex;align-items:center;white-space:nowrap;vertical-align:middle}.mat-radio-container{box-sizing:border-box;display:inline-block;position:relative;width:20px;height:20px;flex-shrink:0}.mat-radio-outer-circle{box-sizing:border-box;height:20px;left:0;position:absolute;top:0;transition:border-color ease 280ms;width:20px;border-width:2px;border-style:solid;border-radius:50%}.mat-radio-inner-circle{border-radius:50%;box-sizing:border-box;height:20px;left:0;position:absolute;top:0;transition:transform ease 280ms,background-color ease 280ms;width:20px;transform:scale(.001)}.mat-radio-checked .mat-radio-inner-circle{transform:scale(.5)}.mat-radio-label-content{display:inline-block;order:0;line-height:inherit;padding-left:8px;padding-right:0}[dir=rtl] .mat-radio-label-content{padding-right:8px;padding-left:0}.mat-radio-label-content.mat-radio-label-before{order:-1;padding-left:0;padding-right:8px}[dir=rtl] .mat-radio-label-content.mat-radio-label-before{padding-right:0;padding-left:8px}.mat-radio-disabled,.mat-radio-disabled .mat-radio-label{cursor:default}.mat-radio-ripple{position:absolute;left:-15px;top:-15px;right:-15px;bottom:-15px;border-radius:50%;z-index:1;pointer-events:none}
+
+</style>
+
 
     <body>
 
@@ -87,7 +112,8 @@
                     </div>
                     <div _ngcontent-c25="" class="step-content">
                         <div _ngcontent-c25="" class="layout-margin" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
-                            <mat-slide-toggle _ngcontent-c25="" class="mat-slide-toggle mat-accent mat-checked mat-slide-toggle-label-before" labelposition="before" id="mat-slide-toggle-1"><label class="mat-slide-toggle-label"><div class="mat-slide-toggle-bar"><input class="mat-slide-toggle-input cdk-visually-hidden" type="checkbox" id="mat-slide-toggle-1-input" tabindex="0"><div class="mat-slide-toggle-thumb-container"><div class="mat-slide-toggle-thumb"></div><div class="mat-slide-toggle-ripple mat-ripple" mat-ripple=""></div></div></div><span class="mat-slide-toggle-content">
+                            <mat-slide-toggle _ngcontent-c25="" class="mat-slide-toggle mat-accent mat-checked mat-slide-toggle-label-before" labelposition="before" id="mat-slide-toggle-1"><label class="mat-slide-toggle-label">
+                                    <div class="mat-slide-toggle-bar" style=" position: absolute; left: 60px;"><input class="mat-slide-toggle-input cdk-visually-hidden" type="checkbox" id="mat-slide-toggle-1-input" tabindex="0"><div class="mat-slide-toggle-thumb-container"><div class="mat-slide-toggle-thumb"></div><div class="mat-slide-toggle-ripple mat-ripple" mat-ripple=""></div></div></div><span class="mat-slide-toggle-content">
                                         <span _ngcontent-c25="" translate="posts.create_post.create_post.detail.shorten">Shorten Urls</span>
                                     </span></label></mat-slide-toggle>
                             <span _ngcontent-c25="" fxflex="" style="flex: 1 1 1e-09px; box-sizing: border-box;"></span>
