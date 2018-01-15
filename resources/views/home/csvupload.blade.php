@@ -3,14 +3,17 @@
 @section('content')
 <link href="{{ asset('css/styleUploadFileFacebook.css') }}" rel="stylesheet">
 <link href="{{ asset('css/styleuploadcsv_statusbrew.css') }}" rel="stylesheet">
-{{--<link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">--}}
+<!--<link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">-->
 <style> 
+        
+        
         td, th { padding:10px;}
         .date_time{display: none; border: 1;}
         #category_id{display: none;}
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/facebookJavaScript.js')}}"> </script>
 
     <body>
 
