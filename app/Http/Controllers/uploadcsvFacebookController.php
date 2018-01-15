@@ -7,14 +7,24 @@ use App\Http\Requests\uploadcsvFacebookRequest;
 use App\AppUsersPosts;
 use Illuminate\Support\Facades\Input;
 use App\category;
+
 class uploadcsvFacebookController extends Controller {
+    /*  public function CheckNotEmpty($ckecked_object) {
+      if (!empty($ckecked_object)){
+      return true;
+      }
+      } */
+
+    /*
+     * Return view with categories
+     */
 
     public function csvPage() {
-       $records= category::latest()->get();
-      // dd($records);
-      return view('home.csvupload',compact('records'));
+        $records = category::latest()->pluck('name', 'id');
+        // dd($records);
+        return view('home.csvupload', compact('records'));
     }
-    
+
     /**
      * @param uploadcsvFacebookRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
@@ -23,7 +33,6 @@ class uploadcsvFacebookController extends Controller {
         $input = $request->all();
         // dd($input['category_id']);
         $AppUsersPosts = new AppUsersPosts();
-
 
         if (!is_null(Input::file('csv_file'))) {
             //if success return filename as String  if fail return false (function in helper.php )
@@ -34,19 +43,31 @@ class uploadcsvFacebookController extends Controller {
                 for ($i = 0; $i < count($posts_from_file); $i++) {
                     if (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && !empty($posts_from_file[$i]['created_time']) && $input['date_time'] == '1') {
 
-                        \DB::table('app_users_posts')->insert(
-                                [['message' => $posts_from_file[$i]['message'],
-                                'created_time' => $posts_from_file[$i]['created_time'], 'picture' => $posts_from_file[$i]['picture'], 'app_user_id' => $input['app_user_id']]
-                        ]);
-                    } elseif (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && $input['date_time'] == '0') {
-                        \DB::table('app_users_posts')->insert([
-                            ['message' => $posts_from_file[$i]['message'], 'picture' => $posts_from_file[$i]['picture'],
-                                'app_user_id' => $input['app_user_id']]
-                        ]);
+                        
+                        echo '<script type="text/javascript">',
+     'jsfunction();',
+     '</script>'
+;
+                        
+//                        \DB::table('app_users_posts')->insert(
+//                                [['message' => $posts_from_file[$i]['message'],
+//                                'created_time' => $posts_from_file[$i]['created_time'], 'picture' => $posts_from_file[$i]['picture'], 'app_user_id' => $input['app_user_id']]
+//                        ]);
+                        
+                        
+                        
+                        
+                        
+                        
+                    } elseif (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && $input['date_time'] == '0' && isset($input['category_id']) && !empty($input['category_id'])) {
+//                        \DB::table('app_users_posts')->insert([
+//                            ['message' => $posts_from_file[$i]['message'], 'picture' => $posts_from_file[$i]['picture'],
+//                                'app_user_id' => $input['app_user_id']]
+//                        ]);
                     } else {
                         return redirect('/facebook_csvFile')->with('fail', 'Not Complete data in file!');
                     }
-                }//en for
+                }//end for
             }
         } else {
             return redirect('/facebook_csvFile')->with('fail', 'file not updated!');

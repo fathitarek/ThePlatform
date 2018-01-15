@@ -48,10 +48,13 @@
 
                                 <div _ngcontent-c25="" class="step-content">
                                     <input type="radio" id="select_category" name="date_time" value="0" style="border-color: #448aff;"> Pre select Category<br>
-                                    <select id="category_id" name="category_id">
-                                    <option value=""> Choose Category</option>
-                                    <option selected value="{{Auth::guard('AppUsers')->user()->id}}">{{Auth::guard('AppUsers')->user()->name}}</option>
-                                </select>
+                                    <!--<select id="category_id" name="category_id">-->
+                                    <!--<option value=""> Choose Category</option>-->
+                                    <!--<option selected value="{{Auth::guard('AppUsers')->user()->id}}">{{Auth::guard('AppUsers')->user()->name}}</option>-->
+                                <!--</select>-->
+                                <br>
+                                {{ Form::select('category_id',$records,null,['placeholder' => 'Choose Category','class'=> '','id'=>'category_id']) }}
+                                <br>
                                     <input type="radio" id="select_date_time" name="date_time" value="1"> Date-time based CSV file<br>
                                     <table border="1" style="margin-bottom: 20px;margin-top: 50px;">
                                         <caption style="padding: 35px;">Your CSV file should be of the following format (do not include the headers)</caption>
