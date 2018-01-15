@@ -25,12 +25,16 @@ class uploadcsvFacebookRequest extends FormRequest
     {
 
         return [
-            'csv_file' => 'required|mimes:csv',
+            'csv_file' => 'required',
+            'date_time'=>'required',
+            'app_user_id'=>'required'
         ];
     }
     public function messages() {
         return [
             'csv_file.required' => 'Please provide a CSV File',
+            'date_time.required'=>'Please choose category or date-time based',
+            'app_user_id.required'=>'Please provide a Account'
         ];
     }
 }

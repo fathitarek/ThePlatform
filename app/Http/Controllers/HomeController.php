@@ -25,7 +25,7 @@ use App\Profiles;
 use App\Resources;
 
 use App\TimeZone;
-
+            
 use App\Category;
 
 
@@ -248,6 +248,10 @@ class HomeController extends Controller
 
     public function register(Request $request){
     $data=$request->input();
+    //  $this->validate($request, [
+    //     'email' => 'required|unique',
+        
+    // ]);
    /*         $validator = Validator::make($request->all(),
 
             array(
