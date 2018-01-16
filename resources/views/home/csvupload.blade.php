@@ -18,6 +18,13 @@
     <body>
 
         <div class="container">
+           
+           @if (isset($_GET['submit'])&& $_GET['submit']==1)
+           
+            <div class="alert alert-success">File Uploaded successfully</div>
+              @endif
+              
+                
             @if (session('sucess'))
             <div class="alert alert-success">
                 {{ session('sucess') }}

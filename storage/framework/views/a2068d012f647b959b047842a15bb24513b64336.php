@@ -16,6 +16,13 @@
     <body>
 
         <div class="container">
+           
+           <?php if(isset($_GET['submit'])&& $_GET['submit']==1): ?>
+           
+            <div class="alert alert-success">File Uploaded successfully</div>
+              <?php endif; ?>
+              
+                
             <?php if(session('sucess')): ?>
             <div class="alert alert-success">
                 <?php echo e(session('sucess')); ?>
