@@ -41,8 +41,10 @@ class statusController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function failedPosts() {
+       //var_dump(date("m/d/Y h:i:s"));
+       // dd(date("m/d/Y h:i:s a", time() +5));
         try {
-            $failed_posts = AppUsersPosts::latest()->where('publish',0)->where('created_time', '<', date('Y-m-d H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
+            $failed_posts = AppUsersPosts::latest()->where('publish',0)->where('created_time', '<', date('Y-m-d H:i:s a', time() +5))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $failed_posts = null;
         }
