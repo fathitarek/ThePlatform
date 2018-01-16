@@ -28,7 +28,7 @@ class statusController extends Controller {
      */
     public function scheduledPosts() {
         try {
-            $scheduled_posts = AppUsersPosts::latest()->where('publish', 0)->where('created_time', '>', date('Y-m-d') . ' 00:00:00')->orderBy('created_time', 'desc')->paginate(15);
+            $scheduled_posts = AppUsersPosts::latest()->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $scheduled_posts = null;
         }
@@ -42,7 +42,7 @@ class statusController extends Controller {
      */
     public function failedPosts() {
         try {
-            $failed_posts = AppUsersPosts::latest()->where('publish',0)->where('created_time', '<', date('Y-m-d') . ' 00:00:00')->orderBy('created_time', 'desc')->paginate(15);
+            $failed_posts = AppUsersPosts::latest()->where('publish',0)->where('created_time', '<', date('Y-m-d H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $failed_posts = null;
         }

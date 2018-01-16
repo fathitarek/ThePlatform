@@ -57,7 +57,7 @@
         @foreach ($failed_posts as $record)
     <tr>
       
-      <td>{{$record->created_time}}</td>
+           <td><?php echo date('Y-m-d H:i:s', strtotime($record->created_time));?></td>
       <td>{{$record->message}}</td>
       <td><div>{!!$record->picture ? '<img src="'.$record->picture.'" height="40"/>':''!!}</div></td>
        <td><i class="fa fa-facebook" aria-hidden="true"></i></td>

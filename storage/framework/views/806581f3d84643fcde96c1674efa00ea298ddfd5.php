@@ -58,13 +58,12 @@
         <?php $__currentLoopData = $scheduled_posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
       
-      <td><?php echo e($record->created_time); ?></td>
+           <td><?php echo date('Y-m-d H:i:s', strtotime($record->created_time));?></td>
       <td><?php echo e($record->message); ?></td>
       <td><div><?php echo $record->picture ? '<img src="'.$record->picture.'" height="40"/>':''; ?></div></td>
        <td><i class="fa fa-facebook" aria-hidden="true"></i></td>
       <td><?php echo e($record->appUser['name']); ?></td>
       <td><?php echo e($record->created_at); ?></td>
-      <td><a href="<?php echo route('routes.edit', [$route->id]); ?>" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a></td>
     </tr>
      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <?php endif; ?>

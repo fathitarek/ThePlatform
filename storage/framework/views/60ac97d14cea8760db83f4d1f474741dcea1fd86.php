@@ -57,7 +57,7 @@
         <?php $__currentLoopData = $publish_posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $record): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
       
-      <td><?php echo e($record->created_time); ?></td>
+      <td><?php echo date('Y-m-d H:i:s', strtotime($record->created_time));?></td>
       <td><?php echo e($record->message); ?></td>
       <td><div><?php echo $record->picture ? '<img src="'.$record->picture.'" height="40"/>':''; ?></div></td>
        <td><i class="fa fa-facebook" aria-hidden="true"></i></td>
