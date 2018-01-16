@@ -8,4 +8,7 @@ class AppUsersPosts extends Model
 {
     //
     protected $table = 'app_users_posts';
+      public function appUser() {
+        return $this->belongsTo('App\AppUsers');
+    }
 }
