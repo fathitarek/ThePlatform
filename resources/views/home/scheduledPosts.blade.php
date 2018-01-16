@@ -3,8 +3,14 @@
 @section('content')
 <link href="{{ asset('css/styleUploadFileFacebook.css') }}" rel="stylesheet">
 <link href="{{ asset('css/styleuploadcsv_statusbrew.css') }}" rel="stylesheet">
-<!--<link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">-->
-<style> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style> 
 .fa{color: blue;}
 
     td, th { padding:10px;}
@@ -64,6 +70,7 @@
        <td><i class="fa fa-facebook" aria-hidden="true"></i></td>
       <td>{{$record->appUser['name']}}</td>
       <td>{{$record->created_at}}</td>
+      <td><a href='scheduledPostsDelete/{{$record->id}}' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-trash"></i></a></td>
     </tr>
      @endforeach
         @endif

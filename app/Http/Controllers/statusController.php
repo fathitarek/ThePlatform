@@ -88,8 +88,18 @@ class statusController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        //
+    public function destroyScheduledPosts($id) {
+        try {
+         $data = AppUsersPosts::findOrFail($id);
+        // dd($data);
+        $data->delete();  
+         return redirect('/scheduledPosts')->with('sucess', 'Post Deleted Successfuly');
+        } catch (Exception $ex) {
+             return redirect('/scheduledPosts')->with('fail', 'Post Can`t Deleted Successfuly');
+        }
+        
+       
     }
+    
 
 }

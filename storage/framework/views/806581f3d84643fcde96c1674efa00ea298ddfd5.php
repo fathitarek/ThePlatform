@@ -1,8 +1,14 @@
 <?php $__env->startSection('content'); ?>
 <link href="<?php echo e(asset('css/styleUploadFileFacebook.css')); ?>" rel="stylesheet">
 <link href="<?php echo e(asset('css/styleuploadcsv_statusbrew.css')); ?>" rel="stylesheet">
-<!--<link href="https://cdn-app.stbrw.net/main.0a78f3f0b2c644e991bb19e00756bbcc.css" rel="stylesheet">-->
-<style> 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><style> 
 .fa{color: blue;}
 
     td, th { padding:10px;}
@@ -64,6 +70,7 @@
        <td><i class="fa fa-facebook" aria-hidden="true"></i></td>
       <td><?php echo e($record->appUser['name']); ?></td>
       <td><?php echo e($record->created_at); ?></td>
+      <td><a href='scheduledPostsDelete/<?php echo e($record->id); ?>' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-trash"></i></a></td>
     </tr>
      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <?php endif; ?>
