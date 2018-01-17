@@ -38,6 +38,11 @@
         <div>
 
             <div _ngcontent-c25="" class="step choose-type">
+ <div >
+                    <a href="{{ URL('scheduledPosts') }}" style="margin-right: 30px; text-decoration: underline">{{ Lang::get('scheduledPosts') }}</a> 
+                    <a href="{{ URL('publishPosts') }}" style="margin-right: 30px;text-decoration: underline;">{{ Lang::get('publishPosts') }}</a>
+                    <a href="{{ URL('failedPosts') }}" style="margin-right: 30px;text-decoration: underline;">{{ Lang::get('failedPosts') }}</a>
+                </div>
 
 
 <table class="table">

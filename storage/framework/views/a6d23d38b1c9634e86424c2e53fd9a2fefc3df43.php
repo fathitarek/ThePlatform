@@ -38,6 +38,11 @@
         <div>
 
             <div _ngcontent-c25="" class="step choose-type">
+ <div >
+                    <a href="<?php echo e(URL('scheduledPosts')); ?>" style="margin-right: 30px; text-decoration: underline"><?php echo e(Lang::get('scheduledPosts')); ?></a> 
+                    <a href="<?php echo e(URL('publishPosts')); ?>" style="margin-right: 30px;text-decoration: underline;"><?php echo e(Lang::get('publishPosts')); ?></a>
+                    <a href="<?php echo e(URL('failedPosts')); ?>" style="margin-right: 30px;text-decoration: underline;"><?php echo e(Lang::get('failedPosts')); ?></a>
+                </div>
 
 
 <table class="table">

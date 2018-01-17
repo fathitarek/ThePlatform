@@ -1,25 +1,24 @@
 <?php $__env->startSection('content'); ?>
 <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId            : '1535009383226574',
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v2.10'
-            });
-            init();
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <script>
+    window.fbAsyncInit = function() {
+    FB.init({
+    appId            : '1535009383226574',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v2.10'
+    });
+    init();
+    };
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<script>
     function init(){}
-    </script>
+</script>
 <link href="<?php echo e(asset('css/styleUploadFileFacebook.css')); ?>" rel="stylesheet">
 <link href="<?php echo e(asset('css/styleuploadcsv_statusbrew.css')); ?>" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
@@ -65,7 +64,11 @@
         <div>
 
             <div _ngcontent-c25="" class="step choose-type">
-
+                <div >
+                    <a href="<?php echo e(URL('scheduledPosts')); ?>" style="margin-right: 30px; text-decoration: underline"><?php echo e(Lang::get('scheduledPosts')); ?></a> 
+                    <a href="<?php echo e(URL('publishPosts')); ?>" style="margin-right: 30px;text-decoration: underline;"><?php echo e(Lang::get('publishPosts')); ?></a>
+                    <a href="<?php echo e(URL('failedPosts')); ?>" style="margin-right: 30px;text-decoration: underline;"><?php echo e(Lang::get('failedPosts')); ?></a>
+                </div>
 
                 <table class="table">
 
@@ -128,27 +131,24 @@
     $("#category_id").css("display", "none");
     }
     });
-          
-   $('.sendNow').click(function(e){
-       e.preventDefault();
-       //alert("rthjrhr");
-       console.log("asdasda")
-        picture = $(this).data('picture');
+    $('.sendNow').click(function(e){
+    e.preventDefault();
+    //alert("rthjrhr");
+    console.log("asdasda")
+            picture = $(this).data('picture');
     var message = $(this).data('message');
-     var page_id = $(this).attr('data-page-id');
-     //alert(picture);
-         create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
+    var page_id = $(this).attr('data-page-id');
+    //alert(picture);
+    create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
+    });
+    function sendNow(picture, page_id, message){
 
-   }); 
-   
-        function sendNow(picture, page_id, message){
-    
     // picture = $(this).data('picture');
     /*var message = $(this).data('message');
      var page_id = $(this).attr('data-page-id');*/
     create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
     }
-    
+
     });
 
 </script>

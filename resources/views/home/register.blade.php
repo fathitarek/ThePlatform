@@ -178,13 +178,13 @@ padding:20px;
 
 
 
-         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+         <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for="email">Username</label>
-                <input class="form-control" name="username" placeholder="Enter Username" >
+                <input class="form-control" value="{{old('username')}}" name="username" placeholder="Enter Username" >
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-                @if ($errors->has('email'))
+                @if ($errors->has('username'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong>{{ $errors->first('username') }}</strong>
                 </span>
                 @endif
             </div>
@@ -192,7 +192,7 @@ padding:20px;
 
             <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email">{{ Lang::get('home.email') }}</label>
-                <input class="form-control" name="email" placeholder="{{ Lang::get('home.enter').Lang::get('home.email') }}" type="email">
+                <input class="form-control" value="{{ old('email') }}" name="email" placeholder="{{ Lang::get('home.enter').Lang::get('home.email') }}" type="email">
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -207,13 +207,13 @@ padding:20px;
 
 
 
-         <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
+         <div class="form-group {{ $errors->has('phone_number') ? ' has-error' : '' }}">
                 <label for="email">Phone</label>
-                <input class="form-control" name="phone_number" placeholder="Enter phone" >
+                <input class="form-control" value="{{old('phone_number') }}" name="phone_number" placeholder="Enter phone" >
                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
-                @if ($errors->has('email'))
+                @if ($errors->has('phone_number'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong>{{ $errors->first('phone_number') }}</strong>
                 </span>
                 @endif
             </div>

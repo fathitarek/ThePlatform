@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AppUsersPosts;
+use App\Category;
+use Illuminate\Support\Facades\Input;
+use File;
+use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class statusController extends Controller {
 
@@ -14,7 +19,7 @@ class statusController extends Controller {
      */
     public function publishPosts() {
         try {
-            $publish_posts = AppUsersPosts::latest()->where('publish', 1)->orderBy('created_time', 'desc')->paginate(15);
+            $publish_posts = AppUsersPosts::latest()->where('publish', 1)->where('app_user_id',Auth::guard('AppUsers')->user()->id)->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $publish_posts = null;
         }
@@ -28,7 +33,7 @@ class statusController extends Controller {
      */
     public function scheduledPosts() {
         try {
-            $scheduled_posts = AppUsersPosts::latest()->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
+            $scheduled_posts = AppUsersPosts::latest()->where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $scheduled_posts = null;
         }
@@ -44,7 +49,7 @@ class statusController extends Controller {
         //var_dump(date("m/d/Y h:i:s"));
         // dd(date("m/d/Y h:i:s a", time() +5));
         try {
-            $failed_posts = AppUsersPosts::latest()->where('publish', 0)->where('created_time', '<', date('Y-m-d H:i:s a', time() + 5))->orderBy('created_time', 'desc')->paginate(15);
+            $failed_posts = AppUsersPosts::latest()->where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '<', date('Y-m-d H:i:s a', time() + 5))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $failed_posts = null;
         }
@@ -52,7 +57,7 @@ class statusController extends Controller {
     }
 
     public function sendNowScheduledPosts($id) {
-                echo' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>
+        echo' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>
         window.fbAsyncInit = function() {
             FB.init({
                 appId            : "1535009383226574",
@@ -105,10 +110,12 @@ class statusController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function editScheduledPosts($id) {
         $data = AppUsersPosts::findOrFail($id);
+        $records = Category::latest()->where('user_id',Auth::guard('AppUsers')->user()->id)->pluck('name', 'id');
+        //dd($data->message);
         try {
-            return view($url, compact('data'));
+            return view('home.edit_scheduledPosts', compact('data', 'records'));
         } catch (Exception $ex) {
             return redirect('/scheduledPosts')->with('fail', 'Post Can`t Deleted Successfuly');
         }
@@ -121,8 +128,53 @@ class statusController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function updateScheduledPosts(Request $request, $id) {
+
+        $post = AppUsersPosts::findOrFail($id);
+        //dd($post->created_time);
+        $input = $request->all();
+        $destination = public_path() . '/postImages'; // upload path
+        //dd($input);
+        if (!isset($input['date_time'])) {
+            // $validator = Validator::make($request->all(), array('date_time' => 'required'));
+            return redirect('/scheduledPostsedit/' . $id)->with('fail', 'please check category based or date time based');
+        }
+
+        if ($input['date_time'] == 1) {
+            $input['created_time'] = date("Y-m-d H:i", strtotime($input['created_time']));
+            $validator = Validator::make($request->all(), array('created_time' => 'required'));
+            if ($validator->fails()) {
+                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose date time ');
+            }
+            $input['category_id'] = '';
+        }
+
+        if ($input['date_time'] == 0) {
+            $validator = Validator::make($request->all(), array('category_id' => 'required'));
+            if ($validator->fails()) {
+                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose category ');
+            }
+            $input['created_time'] = '';
+        }
+
+
+
+        if (!is_null(Input::file('picture'))) {
+            $validator = Validator::make($request->all(), array('picture' => 'required|mimes:jpeg,bmp,png'));
+            if ($validator->fails()) {
+                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose picture as a jpeg or bmp or png');
+            }
+
+            $picture = uploadFile('picture', $destination);
+            // return $similar_sections['image_en'].$image_en ;
+            if (gettype($picture) == 'string') {
+                // dd(public_path() . '/postImages/'.$input['picture']);
+                $input['picture'] = '/postImages/' . $picture;
+            }
+        }
+
+        $post->update($input);
+        return redirect('/scheduledPosts')->with('sucess', 'Post Updated Successfuly');
     }
 
     /**

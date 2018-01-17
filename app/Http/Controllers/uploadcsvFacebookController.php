@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\uploadcsvFacebookRequest;
 use App\AppUsersPosts;
 use Illuminate\Support\Facades\Input;
-use App\category;
+use App\Category;
 
 class uploadcsvFacebookController extends Controller {
     /*  public function CheckNotEmpty($ckecked_object) {
@@ -20,7 +20,7 @@ class uploadcsvFacebookController extends Controller {
      */
 
     public function csvPage() {
-        $records = category::latest()->pluck('name', 'id');
+        $records = Category::latest()->where('user_id',Auth::guard('AppUsers')->user()->id)->pluck('name', 'id');
         // dd($records);
         return view('home.csvupload', compact('records'));
     }
