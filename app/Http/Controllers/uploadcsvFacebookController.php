@@ -44,8 +44,8 @@ class uploadcsvFacebookController extends Controller {
                 for ($i = 0; $i < count($posts_from_file); $i++) {
                     if (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && !empty($posts_from_file[$i]['created_time']) && $input['date_time'] == '1') {
                         //create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid)
-                        
-                        
+
+
                         echo '<script type="text/javascript" src="/js/facebookJavaScript.js"></script><script>
                         create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","","' . $input['_token'] . '");                      
 </script>';
@@ -75,7 +75,7 @@ class uploadcsvFacebookController extends Controller {
             return redirect('/facebook_csvFile')->with('fail', 'file not updated!');
         }
         echo '<script type="text/javascript"> window.location.href="/facebook_csvFile?submit=1"</script>';
-         //return view('home.csvupload')->with('sucess', 'file updated!');
+        //return view('home.csvupload')->with('sucess', 'file updated!');
         //return $this->csvPage();
     }
 
