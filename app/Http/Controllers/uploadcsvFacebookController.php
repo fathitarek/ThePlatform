@@ -48,7 +48,7 @@ class uploadcsvFacebookController extends Controller {
 
 
                         echo '<script type="text/javascript" src="/js/facebookJavaScript.js"></script><script>
-                        create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","","' . $input['_token'] . '");                      
+                        create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","");                      
 </script>';
 
 //                        \DB::table('app_users_posts')->insert(
@@ -58,7 +58,7 @@ class uploadcsvFacebookController extends Controller {
                     } elseif (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && $input['date_time'] == '0' && isset($input['category_id']) && !empty($input['category_id'])) {
 
                         echo '<script type="text/javascript" src="/js/facebookJavaScript.js"></script><script>
-                        create_post("facebook","","","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","' . $input['category_id'] . '","' . $input['_token'] . '");
+                        create_post("facebook","","","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","' . $input['category_id'] . '");
                            
                         </script>';
 

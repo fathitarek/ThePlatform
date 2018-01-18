@@ -725,6 +725,7 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                                 _token: $('meta[name="csrf-token"]').attr('content')
                                             },
                                             success: function (msg) {
+                                                return true;
                                             }
                                         });
         }
@@ -781,10 +782,7 @@ if(picture_url == ''){
        picture_url=$("#postPhoto img").attr('src');
 
 }
-
-
-        publish= 1;
-
+publish= 1;
 postid=postid;
 
         FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(page_id,data){

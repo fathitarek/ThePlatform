@@ -47,7 +47,10 @@
 
         <div class="alert alert-success">Post Send Now successfully</div>
         <?php endif; ?>
+ <?php if(isset($_GET['submit'])&& $_GET['submit']==0): ?>
 
+        <div class="alert alert-danger">Post Can`t Send Now </div>
+        <?php endif; ?>
 
         <?php if(session('sucess')): ?>
         <div class="alert alert-success">
@@ -141,7 +144,13 @@
     var page_id = $(this).attr('data-page-id');
     console.log(picture); console.log(message); console.log(page_id);console.log(post_id);
     //alert(picture);
-    update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
+    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
+    console.log('fn '+update);
+    if (update) {
+    window.location.href="/scheduledPosts?submit=0";
+}else{
+    
+}
     });
 //    function sendNow(picture, page_id, message){
 //
