@@ -19,7 +19,7 @@ class statusController extends Controller {
      */
     public function publishPosts() {
         try {
-            $publish_posts = AppUsersPosts::latest()->where('publish', 1)->where('app_user_id',Auth::guard('AppUsers')->user()->id)->orderBy('created_time', 'desc')->paginate(15);
+            $publish_posts = AppUsersPosts::latest()->where('publish', 1)->where('app_user_id', Auth::guard('AppUsers')->user()->id)->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $publish_posts = null;
         }
@@ -33,7 +33,7 @@ class statusController extends Controller {
      */
     public function scheduledPosts() {
         try {
-            $scheduled_posts = AppUsersPosts::latest()->where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
+            $scheduled_posts = AppUsersPosts::latest()->where('app_user_id', Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $scheduled_posts = null;
         }
@@ -49,7 +49,7 @@ class statusController extends Controller {
         //var_dump(date("m/d/Y h:i:s"));
         // dd(date("m/d/Y h:i:s a", time() +5));
         try {
-            $failed_posts = AppUsersPosts::latest()->where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '<', date('Y-m-d H:i:s a', time() + 5))->orderBy('created_time', 'desc')->paginate(15);
+            $failed_posts = AppUsersPosts::latest()->where('app_user_id', Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '<', date('Y-m-d H:i:s a', time() + 5))->orderBy('created_time', 'desc')->paginate(15);
         } catch (\Exception $ex) {
             $failed_posts = null;
         }
@@ -112,7 +112,7 @@ class statusController extends Controller {
      */
     public function editScheduledPosts($id) {
         $data = AppUsersPosts::findOrFail($id);
-        $records = Category::latest()->where('user_id',Auth::guard('AppUsers')->user()->id)->pluck('name', 'id');
+        $records = Category::latest()->where('user_id', Auth::guard('AppUsers')->user()->id)->pluck('name', 'id');
         //dd($data->message);
         try {
             return view('home.edit_scheduledPosts', compact('data', 'records'));
@@ -131,16 +131,21 @@ class statusController extends Controller {
     public function updateScheduledPosts(Request $request, $id) {
 
         $post = AppUsersPosts::findOrFail($id);
-        //dd($post->created_time);
+        // dump($post->created_time);
         $input = $request->all();
+        // dump($input['created_time']);
         $destination = public_path() . '/postImages'; // upload path
-        //dd($input);
+        //dd($input['date_time']);
         if (!isset($input['date_time'])) {
+            dump("frr");
+            $input['created_time'] = $post->created_time;
+            $input['category_id'] = $post->category_id;
+            // dd($input['created_time']);
             // $validator = Validator::make($request->all(), array('date_time' => 'required'));
-            return redirect('/scheduledPostsedit/' . $id)->with('fail', 'please check category based or date time based');
+            // return redirect('/scheduledPostsedit/' . $id)->with('fail', 'please check category based or date time based');
         }
 
-        if ($input['date_time'] == 1) {
+        if (isset($input['date_time']) && $input['date_time'] == 1) {
             $input['created_time'] = date("Y-m-d H:i", strtotime($input['created_time']));
             $validator = Validator::make($request->all(), array('created_time' => 'required'));
             if ($validator->fails()) {
@@ -149,7 +154,7 @@ class statusController extends Controller {
             $input['category_id'] = '';
         }
 
-        if ($input['date_time'] == 0) {
+        if (isset($input['date_time']) && $input['date_time'] == 0) {
             $validator = Validator::make($request->all(), array('category_id' => 'required'));
             if ($validator->fails()) {
                 return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose category ');
