@@ -56,7 +56,7 @@ class statusController extends Controller {
         return view('home.failedPosts', compact('failed_posts'));
     }
 
-    public function sendNowScheduledPosts($id) {
+  /*  public function sendNowScheduledPosts($id) {
         echo' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -92,7 +92,7 @@ class statusController extends Controller {
             return redirect('/scheduledPosts')->with('fail', 'Post Can`t Send Now Successfuly');
         }
         //$data->delete(); 
-    }
+    }*/
 
     /**
      * Display the specified resource.

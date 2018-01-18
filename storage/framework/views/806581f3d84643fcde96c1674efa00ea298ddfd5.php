@@ -98,9 +98,9 @@
                                 <a href='/scheduledPostsDelete/<?php echo e($record->id); ?>' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-trash"></i></a>
                                 <a href='/scheduledPostsedit/<?php echo e($record->id); ?>' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                                 <?php if(!empty($record->picture)): ?>
-                                <a href='#'  onclick="sendNow(<?php echo e($record->picture); ?>,<?php echo e($record->page_id); ?>,<?php echo e($record->message); ?>);" data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-triangle-right"></i></a>
+                                <a href='#'  data-post_id='<?php echo e($record->id); ?>' data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-triangle-right"></i></a>
                                 <?php else: ?>
-                                <a href='#'  data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon  glyphicon-triangle-right"></i></a>
+                                <a href='#'  data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>'   data-post_id='<?php echo e($record->id); ?>' data-message='<?php echo e($record->message); ?>'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon  glyphicon-triangle-right"></i></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -135,12 +135,13 @@
     e.preventDefault();
     //alert("rthjrhr");
     console.log("asdasda")
-     picture = $(this).data('picture');
+     var post_id = $(this).data('post_id');
+     var picture = $(this).data('picture');
     var message = $(this).data('message');
     var page_id = $(this).attr('data-page-id');
-    console.log(picture); console.log(message); console.log(page_id);
+    console.log(picture); console.log(message); console.log(page_id);console.log(post_id);
     //alert(picture);
-    create_post("facebook", "now", "", "", "", page_id, message, "");
+    update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
     });
 //    function sendNow(picture, page_id, message){
 //
