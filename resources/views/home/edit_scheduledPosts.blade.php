@@ -1,6 +1,5 @@
 @extends('home.layouts.app')
 <!--<link rel="stylesheet" type="text/css" media="screen"-->
-     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
   
 {{--section left side bar --}}
 @section('content')
@@ -103,7 +102,7 @@
                     <div class="row">
                         <div class='col-sm-6'>
                             <div class="form-group">
-                                <button type="submit"  id="update_post" class="btn btn-primary">Upload</button>
+                                <button type="submit"  id="update_post" class="btn btn-primary">Update Post</button>
                             </div></div></div>
                     {!!Form::close()!!}
                 </div>

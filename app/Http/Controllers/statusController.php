@@ -137,7 +137,7 @@ class statusController extends Controller {
         $destination = public_path() . '/postImages'; // upload path
         //dd($input['date_time']);
         if (!isset($input['date_time'])) {
-            dump("frr");
+           // dump("frr");
             $input['created_time'] = $post->created_time;
             $input['category_id'] = $post->category_id;
             // dd($input['created_time']);

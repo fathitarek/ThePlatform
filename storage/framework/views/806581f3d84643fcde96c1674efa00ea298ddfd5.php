@@ -135,19 +135,20 @@
     e.preventDefault();
     //alert("rthjrhr");
     console.log("asdasda")
-            picture = $(this).data('picture');
+     picture = $(this).data('picture');
     var message = $(this).data('message');
     var page_id = $(this).attr('data-page-id');
+    console.log(picture); console.log(message); console.log(page_id);
     //alert(picture);
-    create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
+    create_post("facebook", "now", "", "", "", page_id, message, "");
     });
-    function sendNow(picture, page_id, message){
-
-    // picture = $(this).data('picture');
-    /*var message = $(this).data('message');
-     var page_id = $(this).attr('data-page-id');*/
-    create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
-    }
+//    function sendNow(picture, page_id, message){
+//
+//    // picture = $(this).data('picture');
+//    /*var message = $(this).data('message');
+//     var page_id = $(this).attr('data-page-id');*/
+//    create_post("facebook", "now", "", picture, "", page_id, message, "", page_id);
+//    }
 
     });
 
