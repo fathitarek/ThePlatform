@@ -7,6 +7,7 @@ use App\Http\Requests\uploadcsvFacebookRequest;
 use App\AppUsersPosts;
 use Illuminate\Support\Facades\Input;
 use App\Category;
+use Auth;
 
 class uploadcsvFacebookController extends Controller {
     /*  public function CheckNotEmpty($ckecked_object) {

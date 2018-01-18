@@ -98,9 +98,9 @@
                                 <a href='/scheduledPostsDelete/{{$record->id}}' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-trash"></i></a>
                                 <a href='/scheduledPostsedit/{{$record->id}}' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                                 @if(!empty($record->picture))
-                                <a href='#'  onclick="sendNow({{$record->picture}},{{$record->page_id}},{{$record->message}});" data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href='#'  onclick="sendNow({{$record->picture}},{{$record->page_id}},{{$record->message}});" data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-triangle-right"></i></a>
                                 @else
-                                <a href='#'  data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href='#'  data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon  glyphicon-triangle-right"></i></a>
                                 @endif
                             </td>
                         </tr>

@@ -98,9 +98,9 @@
                                 <a href='/scheduledPostsDelete/<?php echo e($record->id); ?>' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-trash"></i></a>
                                 <a href='/scheduledPostsedit/<?php echo e($record->id); ?>' class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                                 <?php if(!empty($record->picture)): ?>
-                                <a href='#'  onclick="sendNow(<?php echo e($record->picture); ?>,<?php echo e($record->page_id); ?>,<?php echo e($record->message); ?>);" data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href='#'  onclick="sendNow(<?php echo e($record->picture); ?>,<?php echo e($record->page_id); ?>,<?php echo e($record->message); ?>);" data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'   class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-triangle-right"></i></a>
                                 <?php else: ?>
-                                <a href='#'  data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href='#'  data-picture='<?php echo e($record->picture); ?>' data-page-id='<?php echo e($record->page_id); ?>' data-message='<?php echo e($record->message); ?>'  id="" class='btn btn-default btn-xs sendNow'><i class="glyphicon  glyphicon-triangle-right"></i></a>
                                 <?php endif; ?>
                             </td>
                         </tr>
