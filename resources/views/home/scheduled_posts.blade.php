@@ -1,4 +1,4 @@
-4@extends('home.layouts.app')
+@extends('home.layouts.app')
 @section('headScript')
 
     <script>
@@ -45,30 +45,6 @@
 
 @if(count($userposts))
 @foreach($userposts as $post)
-
-
-
-
-
-
-
-
-@if($post->category_id != NULL)
-@foreach(DB::table('categories')->where('id', '=', $post->category_id)->orderBy('id','DESC')->get() as $cat)
-<?php 
-$datetime = DateTime::createFromFormat('YmdHi', '201308131830');
-echo $datetime->format('D');
-$times = explode('|',  $cat->sunday); ?>
-@foreach($times as $time)
-<tr>
-<td>{{$time}}</td>
-</tr>
-@endforeach
-@endforeach
-@endif
-
-
-
       <tr>
         <td>{{$post->id}}</td>
         <td>{{$post->app_user_id}}</td>
@@ -76,7 +52,7 @@ $times = explode('|',  $cat->sunday); ?>
         <td>{{$post->message}}</td>
         <td>{{$post->created_time}}</td>
       </tr>
-
+@endforeach
    </tbody>
   </table>
 </div>
@@ -145,7 +121,7 @@ console.log('this post is schedueled');
   });
 </script>
 
-@endforeach
+
 @endif
 
 

@@ -11,7 +11,7 @@
         <form action="{{ URL('addcategry') }}" method="POST" id="my-awesome-dropzone">
           {{ csrf_field() }}
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-        <input class="form-control" name="postcategry" placeholder="Category Name" style="" ><br><br>
+        <input class="form-control" name="postcategry" placeholder="Category Name" style="" required="required" ><br><br>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         </div>    

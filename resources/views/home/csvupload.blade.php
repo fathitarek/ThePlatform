@@ -45,9 +45,11 @@
                     <span _ngcontent-c25="" class="step-subhead" translate="">Tell us for which profile you want to upload the CSV</span>
                     <div _ngcontent-c25="" style="height:20px;"></div>
                         <form method="post" action="{{ url('/facebook/csv') }}" enctype="multipart/form-data">
-                            <select required name="app_user_id">
+                            <select required name="page_id">
                                     <option value=""> Choose Account</option>
-                                    <option selected value="{{Auth::guard('AppUsers')->user()->id}}">{{Auth::guard('AppUsers')->user()->name}}</option>
+                               @foreach($pages as $page)
+                                    <option value="{{$page->page_id}}">{{$page->page_name}}</option>
+                                   @endforeach
                                 </select>
                                 <div _ngcontent-c25="" class="layout-padding" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
                                     <span _ngcontent-c25="" class="step-count" fxlayout="" fxlayoutalign="center center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center; align-items: center;">2</span>

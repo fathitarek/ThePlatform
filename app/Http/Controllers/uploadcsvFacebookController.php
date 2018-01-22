@@ -8,6 +8,7 @@ use App\AppUsersPosts;
 use Illuminate\Support\Facades\Input;
 use App\Category;
 use Auth;
+use App\AppUsersPages;
 
 class uploadcsvFacebookController extends Controller {
     /*  public function CheckNotEmpty($ckecked_object) {
@@ -21,9 +22,12 @@ class uploadcsvFacebookController extends Controller {
      */
 
     public function csvPage() {
+        //dd(Auth::guard('AppUsers')->user()->id);
+        $pages = AppUsersPages::latest()->where('app_user_id',Auth::guard('AppUsers')->user()->id)->get();
+//dd($pages);
         $records = Category::latest()->where('user_id',Auth::guard('AppUsers')->user()->id)->pluck('name', 'id');
         // dd($records);
-        return view('home.csvupload', compact('records'));
+        return view('home.csvupload', compact('records','pages'));
     }
 
     /**
@@ -33,7 +37,7 @@ class uploadcsvFacebookController extends Controller {
     public function import(uploadcsvFacebookRequest $request) {
         echo' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
         $input = $request->all();
-        // dd($input['_token']);
+       //  dd($input['_token']);
         $AppUsersPosts = new AppUsersPosts();
 
         if (!is_null(Input::file('csv_file'))) {
@@ -45,10 +49,11 @@ class uploadcsvFacebookController extends Controller {
                 for ($i = 0; $i < count($posts_from_file); $i++) {
                     if (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && !empty($posts_from_file[$i]['created_time']) && $input['date_time'] == '1') {
                         //create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid)
-
+//dd($posts_from_file[$i]['message']);
+  //create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid){
 
                         echo '<script type="text/javascript" src="/js/facebookJavaScript.js"></script><script>
-                        create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","");                      
+                        create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]['picture'] . '","0","' . $input['page_id'] . '","' . $posts_from_file[$i]['message'] . '","","' . $input['_token'] . '","/facebook_csvFile?submit=1");
 </script>';
 
 //                        \DB::table('app_users_posts')->insert(
@@ -56,9 +61,9 @@ class uploadcsvFacebookController extends Controller {
 //                                'created_time' => $posts_from_file[$i]['created_time'], 'picture' => $posts_from_file[$i]['picture'], 'app_user_id' => $input['app_user_id']]
 //                        ]);
                     } elseif (!empty($posts_from_file[$i]['message']) && !empty($posts_from_file[$i]['picture']) && $input['date_time'] == '0' && isset($input['category_id']) && !empty($input['category_id'])) {
-
+//dd($input['category_id']);
                         echo '<script type="text/javascript" src="/js/facebookJavaScript.js"></script><script>
-                        create_post("facebook","","","' . $posts_from_file[$i]["picture"] . '","0","522235181447370","' . $posts_from_file[$i]['message'] . '","' . $input['category_id'] . '");
+                        create_post("facebook","","","' . $posts_from_file[$i]['picture'] . '","0","' . $input['page_id'] . '","' . $posts_from_file[$i]['message'] . '","' . $input['category_id'] . '","' . $input['_token'] . '","/facebook_csvFile?submit=1");
                            
                         </script>';
 
@@ -75,7 +80,7 @@ class uploadcsvFacebookController extends Controller {
         } else {
             return redirect('/facebook_csvFile')->with('fail', 'file not updated!');
         }
-        echo '<script type="text/javascript"> window.location.href="/facebook_csvFile?submit=1"</script>';
+       // echo '<script type="text/javascript"> window.location.href="/facebook_csvFile?submit=1"</script>';
         //return view('home.csvupload')->with('sucess', 'file updated!');
         //return $this->csvPage();
     }

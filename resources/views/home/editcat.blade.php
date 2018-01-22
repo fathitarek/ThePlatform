@@ -42,15 +42,19 @@
 <div class="divTableRow">
 
 <div class="divTableCell"><div class="sun">
-@if($category->sunday)
 
-<?php $featuresp = explode('|', $category->sunday); 
 
-?>
-@foreach ($featuresp as $feature)
+
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '2'],
+])->get() as $sunday)   
+
+
+
 <div class="sundayy">
 <?php $abc++ ?>
-<input name='sun[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='sun[]' id='input-a{{$abc}}' class='input-a' value='{{$sunday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 
@@ -68,9 +72,7 @@ $("#input-a"+abc).mydatepicker(2);
 <button type="button" class="sunbu btn btn-primary-outline">Add Time</button>
 
 
-@else
-<button type="button" class="sunbu btn btn-primary-outline">Add Time</button>
-@endif
+
 </div></div>
 
 
@@ -78,36 +80,39 @@ $("#input-a"+abc).mydatepicker(2);
 
 
 <div class="divTableCell"><div class="mond">
-@if($category->monday)
-<?php $featuresp = explode('|', $category->monday); ?>
-@foreach ($featuresp as $feature)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '3'],
+])->get() as $monday)   
+
 
 <?php $abc++ ?>
 
 <div class="sunday">
-<input name='mond[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='mond[]' id='input-a{{$abc}}' class='input-a' value='{{$monday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
   <button type="button" class="mondbu btn btn-primary-outline">Add Time</button>
 
-@else
-  <button type="button" class="mondbu btn btn-primary-outline">Add Time</button>
-@endif
+
 </div></div>
 
 
 
 
 <div class="divTableCell"><div class="tues">
-@if($category->tuesday)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '4'],
+])->get() as $tuesday)   
 
-<?php $featuresp = explode('|', $category->tuesday); ?>
-@foreach ($featuresp as $feature)
+
+
 <?php $abc++ ?>
 
 <div class="tuesday">
-<input name='tues[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='tues[]' id='input-a{{$abc}}' class='input-a' value='{{$tuesday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
@@ -116,24 +121,20 @@ $("#input-a"+abc).mydatepicker(2);
 
 
 
-
-
-@else
-<button type="button" class="tuesbu btn btn-primary-outline">Add Time</button>
-@endif
 </div></div>
 
 
 
 <div class="divTableCell"><div class="wedn">
-@if($category->wednesday)
-<?php $featuresp = explode('|', $category->wednesday); ?>
-@foreach ($featuresp as $feature)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '5'],
+])->get() as $wednesday)  
 
 <?php $abc++ ?>
 
 <div class="wednesday">
-<input name='wedn[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='wedn[]' id='input-a{{$abc}}' class='input-a' value='{{$wednesday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
@@ -142,43 +143,43 @@ $("#input-a"+abc).mydatepicker(2);
 
 
 
-@else
-  <button type="button" class="wednbu btn btn-primary-outline">Add Time</button>
-  @endif
 </div></div>
 
 
 <div class="divTableCell"><div class="thurs">
 
-@if($category->thursday)
-<?php $featuresp = explode('|', $category->thursday); ?>
-@foreach ($featuresp as $feature)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '6'],
+])->get() as $thursday)   
+
+
+
 
 <?php $abc++ ?>
 
 <div class="thursday">
-<input name='thurs[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='thurs[]' id='input-a{{$abc}}' class='input-a' value='{{$thursday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
   <button type="button" class="thursbu btn btn-primary-outline">Add Time</button>
 
-@else
-  <button type="button" class="thursbu btn btn-primary-outline">Add Time</button>
-  @endif
 </div></div>
 
 
 
 <div class="divTableCell"><div class="frid">
-@if($category->friday)
-<?php $featuresp = explode('|', $category->thursday); ?>
-@foreach ($featuresp as $feature)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '7'],
+])->get() as $friday)   
+
 
 <?php $abc++ ?>
 
 <div class="friday">
-<input name='frid[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='frid[]' id='input-a{{$abc}}' class='input-a' value='{{$friday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
@@ -186,29 +187,25 @@ $("#input-a"+abc).mydatepicker(2);
 
 
 
-
-@else
-  <button type="button" class="fridbu btn btn-primary-outline">Add Time</button>
-  @endif
 </div></div>
 
 
 <div class="divTableCell"><div class="satur">
-@if($category->saturday)
-<?php $featuresp = explode('|', $category->saturday); ?>
-@foreach ($featuresp as $feature)
+@foreach(\App\CategoryPlans::where([
+    ['category_id', '=', $category->id],
+    ['doweek', '=', '1'],
+])->get() as $saturday)
+
 
 <?php $abc++ ?>
 
 <div class="saturday">
-<input name='satu[]' id='input-a{{$abc}}' class='input-a' value='{{ $feature }}' data-default='20:48'>
+<input name='satu[]' id='input-a{{$abc}}' class='input-a' value='{{$saturday->time}}' data-default='20:48'>
 <img style="width:15px; height:15px;" class="deleteinp" src={{ asset('img/cancel.png') }}>
 </div>
 @endforeach
   <button type="button" class="saturbu btn btn-primary-outline">Add Time</button>
-@else
-  <button type="button" class="saturbu btn btn-primary-outline">Add Time</button>
-@endif
+
 
 </div></div>
 </div>

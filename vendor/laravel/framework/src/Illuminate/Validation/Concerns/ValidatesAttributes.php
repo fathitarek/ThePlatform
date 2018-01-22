@@ -358,9 +358,7 @@ trait ValidatesAttributes
             return false;
         }
 
-        $format = $parameters[0] == 'Y-m' ? '!Y-m' : $parameters[0];
-
-        $date = DateTime::createFromFormat($format, $value);
+        $date = DateTime::createFromFormat($parameters[0], $value);
 
         return $date && $date->format($parameters[0]) == $value;
     }

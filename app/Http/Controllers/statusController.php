@@ -56,7 +56,7 @@ class statusController extends Controller {
         return view('home.failedPosts', compact('failed_posts'));
     }
 
-  /*  public function sendNowScheduledPosts($id) {
+    public function sendNowScheduledPosts($id) {
         echo' <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -92,7 +92,7 @@ class statusController extends Controller {
             return redirect('/scheduledPosts')->with('fail', 'Post Can`t Send Now Successfuly');
         }
         //$data->delete(); 
-    }*/
+    }
 
     /**
      * Display the specified resource.
@@ -133,50 +133,51 @@ class statusController extends Controller {
         $post = AppUsersPosts::findOrFail($id);
         // dump($post->created_time);
         $input = $request->all();
+        dd($input);
         // dump($input['created_time']);
         $destination = public_path() . '/postImages'; // upload path
         //dd($input['date_time']);
-        if (!isset($input['date_time'])) {
-           // dump("frr");
-            $input['created_time'] = $post->created_time;
-            $input['category_id'] = $post->category_id;
-            // dd($input['created_time']);
-            // $validator = Validator::make($request->all(), array('date_time' => 'required'));
-            // return redirect('/scheduledPostsedit/' . $id)->with('fail', 'please check category based or date time based');
-        }
+//        if (!isset($input['date_time'])) {
+//           // dump("frr");
+//            $input['created_time'] = $post->created_time;
+//            $input['category_id'] = $post->category_id;
+//            // dd($input['created_time']);
+//            // $validator = Validator::make($request->all(), array('date_time' => 'required'));
+//            // return redirect('/scheduledPostsedit/' . $id)->with('fail', 'please check category based or date time based');
+//        }
 
-        if (isset($input['date_time']) && $input['date_time'] == 1) {
-            $input['created_time'] = date("Y-m-d H:i", strtotime($input['created_time']));
-            $validator = Validator::make($request->all(), array('created_time' => 'required'));
-            if ($validator->fails()) {
-                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose date time ');
-            }
-            $input['category_id'] = '';
-        }
+//        if (isset($input['date_time']) && $input['date_time'] == 1) {
+//            $input['created_time'] = date("Y-m-d H:i", strtotime($input['created_time']));
+//            $validator = Validator::make($request->all(), array('created_time' => 'required'));
+//            if ($validator->fails()) {
+//                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose date time ');
+//            }
+//            $input['category_id'] = '';
+//        }
 
-        if (isset($input['date_time']) && $input['date_time'] == 0) {
-            $validator = Validator::make($request->all(), array('category_id' => 'required'));
-            if ($validator->fails()) {
-                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose category ');
-            }
-            $input['created_time'] = '';
-        }
+//        if (isset($input['date_time']) && $input['date_time'] == 0) {
+//            $validator = Validator::make($request->all(), array('category_id' => 'required'));
+//            if ($validator->fails()) {
+//                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose category ');
+//            }
+//            $input['created_time'] = '';
+//        }
 
 
 
-        if (!is_null(Input::file('picture'))) {
-            $validator = Validator::make($request->all(), array('picture' => 'required|mimes:jpeg,bmp,png'));
-            if ($validator->fails()) {
-                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose picture as a jpeg or bmp or png');
-            }
-
-            $picture = uploadFile('picture', $destination);
-            // return $similar_sections['image_en'].$image_en ;
-            if (gettype($picture) == 'string') {
-                // dd(public_path() . '/postImages/'.$input['picture']);
-                $input['picture'] = '/postImages/' . $picture;
-            }
-        }
+//        if (!is_null(Input::file('picture'))) {
+//            $validator = Validator::make($request->all(), array('picture' => 'required|mimes:jpeg,bmp,png'));
+//            if ($validator->fails()) {
+//                return redirect('/scheduledPostsedit/' . $id)->with('fail', 'choose picture as a jpeg or bmp or png');
+//            }
+//
+//            $picture = uploadFile('picture', $destination);
+//            // return $similar_sections['image_en'].$image_en ;
+//            if (gettype($picture) == 'string') {
+//                // dd(public_path() . '/postImages/'.$input['picture']);
+//                $input['picture'] = '/postImages/' . $picture;
+//            }
+//        }
 
         $post->update($input);
         return redirect('/scheduledPosts')->with('sucess', 'Post Updated Successfuly');

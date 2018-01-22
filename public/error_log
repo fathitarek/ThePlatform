@@ -1,3 +1,59 @@
 [01-Nov-2017 06:19:20 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
 [01-Nov-2017 06:19:27 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
 [05-Nov-2017 10:01:06 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/HomeController.php on line 231
+[03-Dec-2017 10:37:49 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:38:01 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:38:27 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:51:28 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:51:30 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:59:00 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 10:59:10 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:28:23 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:28:32 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:28:36 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:42:17 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:43:56 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:43:59 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:59:00 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:59:02 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:59:05 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[03-Dec-2017 13:59:17 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/kheprat/public_html/social.al-moasher.net/resources/lang/en/home.php on line 1
+[17-Dec-2017 12:28:57 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/kheprat/public_html/social.al-moasher.net/storage/framework/views/6be4db0de2351981ae3e2587ec679bba81c2c1dc.php on line 123
+[24-Dec-2017 10:56:49 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[24-Dec-2017 10:57:14 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 08:57:28 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:57:34 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:57:35 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:57:39 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:57:53 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:00 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:08 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:10 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:11 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:13 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:14 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:15 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:17 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:18 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 08:58:19 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:00:23 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:00:26 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:00:41 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:00:43 UTC] PHP Parse error:  syntax error, unexpected 'Maatwebsite' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:01:20 UTC] PHP Parse error:  syntax error, unexpected 'convertToDateTimeLocal' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:01:25 UTC] PHP Parse error:  syntax error, unexpected 'convertToDateTimeLocal' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:01:25 UTC] PHP Parse error:  syntax error, unexpected 'convertToDateTimeLocal' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:01:52 UTC] PHP Parse error:  syntax error, unexpected 'convertToDateTimeLocal' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/app/helpers/helper.php on line 1
+[11-Jan-2018 09:47:45 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 09:47:50 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 09:51:17 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 09:54:36 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 09:54:38 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[11-Jan-2018 09:55:42 UTC] PHP Parse error:  syntax error, unexpected 'Route' (T_STRING) in /home/kheprat/public_html/social.al-moasher.net/routes/web.php on line 1
+[15-Jan-2018 12:23:41 UTC] PHP Fatal error:  Class 'App\Category' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/HomeController.php on line 533
+[17-Jan-2018 08:00:01 UTC] PHP Fatal error:  Class 'App\category' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23
+[17-Jan-2018 08:00:36 UTC] PHP Fatal error:  Class 'App\category' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23
+[18-Jan-2018 07:23:50 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Auth' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23
+[18-Jan-2018 07:25:24 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Auth' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23
+[18-Jan-2018 07:25:46 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Auth' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23
+[18-Jan-2018 07:26:37 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Auth' not found in /home/kheprat/public_html/social.al-moasher.net/app/Http/Controllers/uploadcsvFacebookController.php on line 23

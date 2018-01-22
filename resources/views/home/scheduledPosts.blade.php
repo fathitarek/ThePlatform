@@ -119,6 +119,46 @@
 </div>
 
 <script>
+    function facebookposttopage(page_id,e)
+    {
+        //get access token
+        $.ajax({
+            type: "POST",
+            url: "{{ URL('getaccesstoken') }}/"+page_id,
+            data: {
+                "page_id": page_id,
+                _token: token
+            },
+            success: function (msg) {
+                var post_id = e.data('post_id');
+                var picture = e.data('picture');
+                var message = e.data('message');
+                var page_id = e.data('page-id');
+                console.log( e);
+                console.log("page id is :" +page_id);
+                console.log('assign accesstoken:',msg);
+                FaceBook.setAccessToken(msg);
+                //addfacebookpost(page_id);
+                var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id,'/scheduledPosts?submit=1','/scheduledPosts?submit=0');
+                console.log('UPDATE '+update);
+//                if (update) {
+//                    console.log('UPDATE yes');
+//                  //  window.location.href="/scheduledPosts?submit=1";
+//                }else{
+//                    console.log('UPDATE  NO');
+//                  //  window.location.href="/scheduledPosts?submit=0";
+//                }
+
+            },
+            error: function (msg) {
+                console.log('error :',msg);
+
+            },
+
+        });
+        //get access token
+    }
+
     $(document).ready(function () {
     $('#select_category').click(function () {
     if ($('#select_category').is(':checked')) {
@@ -144,13 +184,14 @@
     var page_id = $(this).attr('data-page-id');
     console.log(picture); console.log(message); console.log(page_id);console.log(post_id);
     //alert(picture);
-    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
-    console.log('fn '+update);
-    if (update) {
-    window.location.href="/scheduledPosts?submit=0";
-}else{
-    
-}
+        facebookposttopage(page_id,$(this));
+//    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
+//    console.log('fn '+update);
+//    if (update) {
+//    window.location.href="/scheduledPosts?submit=1";
+//}else{
+//
+//}
     });
 //    function sendNow(picture, page_id, message){
 //

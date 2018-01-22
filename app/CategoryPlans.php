@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoryPlans extends Model
 {
-        protected $table = 'category_plan';
+protected $table = 'category_plan';
 
 
 public function category()
