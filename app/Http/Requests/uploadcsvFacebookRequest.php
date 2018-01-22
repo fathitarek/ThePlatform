@@ -25,9 +25,9 @@ class uploadcsvFacebookRequest extends FormRequest
     {
 
         return [
+            'page_id'=>'required',
             'csv_file' => 'required',
-            'date_time'=>'required',
-            'page_id'=>'required'
+            'date_time'=>'required'
         ];
     }
     public function messages() {

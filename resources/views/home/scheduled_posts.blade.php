@@ -30,7 +30,7 @@
         @section('content')
 
 
-<div class="container">           
+<div class="container">
   <table class="table table-striped">
     <thead>
       <tr>

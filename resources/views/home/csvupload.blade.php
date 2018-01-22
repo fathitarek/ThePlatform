@@ -46,11 +46,11 @@
                     <div _ngcontent-c25="" style="height:20px;"></div>
                         <form method="post" action="{{ url('/facebook/csv') }}" enctype="multipart/form-data">
                             <select required name="page_id">
-                                    <option value=""> Choose Account</option>
-                               @foreach($pages as $page)
+                                <option value=""> Choose Account</option>
+                                @foreach($pages as $page)
                                     <option value="{{$page->page_id}}">{{$page->page_name}}</option>
-                                   @endforeach
-                                </select>
+                                @endforeach
+                            </select>
                                 <div _ngcontent-c25="" class="layout-padding" fxlayout="" fxlayoutalign="start center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center flex-start; align-items: center;">
                                     <span _ngcontent-c25="" class="step-count" fxlayout="" fxlayoutalign="center center" style="box-sizing: border-box; max-height: 100%; display: flex; flex-direction: row; place-content: center; align-items: center;">2</span>
                                     <span _ngcontent-c25="" translate="">Choose from the following csv formats to upload</span>

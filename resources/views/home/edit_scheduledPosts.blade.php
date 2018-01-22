@@ -686,17 +686,17 @@
             <div class="statuschoose">
                 <input id="datetime" value="{{$data->created_time}}" type="datetime-local" name="created_time">{{$data->created_time}}
 
-                <div class="innerstatus">
-                    <label>
-                        <input type="radio" id="customtime" class="option-input radio" name="example" checked />
-                        Custom Time
+                {{--<div class="innerstatus">--}}
+                    {{--<label>--}}
+                        {{--<input type="radio" id="customtime" class="option-input radio" name="example" checked />--}}
+                        {{--Custom Time--}}
 
-                    </label><br>
-                    <div id="test now" class="usescheduled">
-                        <a href="" onclick="return false;" date-time="now" class="schedule">Now</a>
-                        <p class="alertchooseprofile">Please choose your Profile..</p>
+                    {{--</label><br>--}}
+                    {{--<div id="test now" class="usescheduled">--}}
+                        {{--<a href="" onclick="return false;" date-time="now" class="schedule">Now</a>--}}
+                        {{--<p class="alertchooseprofile">Please choose your Profile..</p>--}}
 
-                    </div>
+                    {{--</div>--}}
 
                     {{--<label>--}}
                         {{--<input type="radio" id="scheduledcat" class="option-input radio" name="example" />--}}
@@ -723,7 +723,7 @@
 
 
 
-                </div>
+                {{--</div>--}}
             </div>
 
             <br><br>
@@ -745,7 +745,7 @@
     </div>
     <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
         <h4 class="prev">Post Preview</h4>
-        <p>Please select a profile to preview </p>
+        <p>Please select a profile to preview</p>
         <p></p>
 
         <div id="preview">

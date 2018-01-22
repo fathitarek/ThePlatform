@@ -1018,9 +1018,9 @@ $categoryplan->save();
 
 
 
-if(isset($request->satu)){
+if(isset($request->satur)){
 
-foreach ($request->satu as $saturday) {
+foreach ($request->satur as $saturday) {
 
  $arraystrst[] = strtotime($saturday);
 
@@ -1362,9 +1362,9 @@ $categoryplan->save();
 
 
 
-if(isset($request->satu)){
+if(isset($request->satur)){
 
-foreach ($request->satu as $saturday) {
+foreach ($request->satur as $saturday) {
 
  $arraystrst[] = strtotime($saturday);
 
@@ -2181,9 +2181,7 @@ return view('home.scheduled_posts',compact('userposts'));
             ->select('accessToken')
             ->where ([['app_users.id','=',Auth::guard('AppUsers')->user()->id],["page_id","=",$page_id]])
             ->limit(1)
-       // ->toSql();
-       // dd($accesstoken);
-        ->get('accessToken');
+            ->get('accessToken');
 
         //return $accesstoken ;
         return $accesstoken->get(0)->accessToken ;
@@ -2752,6 +2750,9 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
 
 
         $data=$request->input();
+
+
+
         $validator = Validator::make($request->all(),
 
             array(
@@ -2778,7 +2779,7 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
 
 
            if(isset($data['category_id'])){
-            $appPosts=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('category_id',$data['category_id'])->orderBy('id', 'DESC')->first();
+            $appPosts=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->orderBy('id', 'DESC')->first();
             $planid=CategoryPlans::select('id')->where('category_id',$data['category_id'])->orderBy('id')->pluck('id')->toArray();
             $appcategoryday=CategoryPlans::select('day')->where('category_id',$data['category_id'])->orderBy('id')->pluck('day')->toArray();
             $appcategory=CategoryPlans::select('time')->where('category_id',$data['category_id'])->orderBy('id')->pluck('time')->toArray();
@@ -2806,7 +2807,7 @@ if(isset($data['category_id'])){
     $finalschedule = $date->format('Y-m-d');
     $finalschedule.=' '.$scheduledpost;
 
-$checkdate=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('category_id',$data['category_id'])->where('lastedit_by',$lastt_post)->count();
+$checkdate=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->where('lastedit_by',$lastt_post)->count();
 if(count($checkdate)){
 $date->modify('+'.$checkdate.' week');
   $finalschedule = $date->format('Y-m-d');
@@ -2823,7 +2824,7 @@ $date->modify('+'.$checkdate.' week');
     $finalschedule = $date->format('Y-m-d');
     $finalschedule.=' '.$scheduledpost;
 
-$checkdate=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('category_id',$data['category_id'])->where('lastedit_by',$lastt_post)->count();
+$checkdate=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->where('lastedit_by',$lastt_post)->count();
 if(count($checkdate)){
 $date->modify('+'.$checkdate.' week');
   $finalschedule = $date->format('Y-m-d');
@@ -2849,7 +2850,6 @@ if (strcasecmp($today, $scheduledday) == 0) {
     $date->modify('next '.$scheduledday);
 }
     $fulltime[]=$date->format('Y-m-d').' '.$scheduledpost;
-
 }
 
 $today = date("Y-m-d H:i");

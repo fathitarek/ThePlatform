@@ -79,15 +79,15 @@ FB.api('/oauth/access_token','GET',{grant_type:'fb_exchange_token',client_id:'15
 
 
 
-geturlmeta:function(url,func){
- $.ajax({
-    type: "GET",
-    url: "https://graph.facebook.com/v2.11/?id=https%3A%2F%2Fwww.e3melbusiness.com%2F&fields=og_object%7Bid%2Ctitle%2Cdescription%2Cimage%7D&access_token=EAACEdEose0cBAPX6erZCVOd7pAIHmvTD0CCFuSGUlvm48ScV3Mh16n5IhGWzJaRmIBe6hErakrf7kYoqnBnJn7yhxDHq7kyGwRl9QZBFKrp4sXB8BFKcC7Tbf6FK5Na80QoSASxO6qzy6Usjx9NBTrZAROsixiY8ZBVZCLgUTxV3lPE72ONSrn2ZCjOyWtFZA8ZD",
-    success: function (msg) {
-        func(msg);
-    }
-    });
-},
+    geturlmeta:function(url,accessToken,func){
+        $.ajax({
+            type: "GET",
+            url: "https://graph.facebook.com/v2.11/?id="+url+"&fields=og_object{id,title,description,image}&access_token="+accessToken,
+            success: function (msg) {
+                func(msg);
+            }
+        });
+    },
 
 
 
@@ -714,13 +714,12 @@ geturlmeta:function(url,func){
 
 
 
+//function create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid){
 function create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid,mytoken,sucessURL){
-
 if(picture_url == ''){
        picture_url=$("#postPhoto img").attr('src');
 
 }
-
 
 if(page_type=='facebook'){
 
@@ -734,6 +733,7 @@ scheduleDateTime=newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.ge
 
 FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(page_id,data){
                                     console.log(data);
+
                                     if(data.error){
                                         $("#errorMessage").html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.error.message+'</div>');
                                     }else{
@@ -741,8 +741,8 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                         resource_id=(typeof resource_id=='undefined')?0:resource_id;
                                         $.ajax({
                                             type: "POST",
-                                            url: '../addPost',
-
+                                            url: URL+'/addPost',
+                                            //url: '../addPost',
                                             data: {
                                                 "page_id": page_id,
                                                 "message": message,
@@ -750,6 +750,7 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                                 "scheduleDateTime": scheduleDateTime,
                                                 "post_id": post_id,
                                                 "resource_id": resource_id,
+                                                //_token: $('meta[name="csrf-token"]').attr('content')
                                                 _token: mytoken
                                             },
                                             success: function (msg) {
@@ -775,8 +776,8 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                 console.log(page_id,message,scheduleDate);
                                         $.ajax({
                                             type: "POST",
-                                            url: '../addPost',
-                                            //url: "{{ URL('addPost') }}",
+                                            url: URL+'/addPost',
+                                            //url: '../addPost',
                                             data: {
                                                 "page_id": page_id,
                                                 "message": message,
@@ -785,10 +786,10 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                                 "category_id":categoryid,
                                                 "post_id": '132',
                                                 "resource_id": '145',
+                                                //_token: $('meta[name="csrf-token"]').attr('content')
                                                 _token: mytoken
                                             },
                                             success: function (msg) {
-                                               // return true;
                                                 window.location.href=sucessURL;
                                             }
                                         });
@@ -838,7 +839,7 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
 
 
 
-function update_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid,postid,sucessURL,errorURL){
+function update_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid,postid){
 
 
 
@@ -865,13 +866,9 @@ postid=postid;
                                                 _token: token
                                             },
                                             success: function (msg) {
-                                               window.location.href=sucessURL;
-                                            },
-                                            error: function (msg) {
-                                                window.location.href=errorURL;
                                             }
                                         });
                 
             });
-return true;
+
 }
