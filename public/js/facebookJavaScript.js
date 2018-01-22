@@ -715,7 +715,8 @@ FB.api('/oauth/access_token','GET',{grant_type:'fb_exchange_token',client_id:'15
 
 
 //function create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid){
-function create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid,mytoken,sucessURL){
+function create_post(page_type,scheduleDate,scheduleDateTime,picture_url,resource_id,page_id,message,categoryid,mytoken,sucessURL,errorURL){
+
 if(picture_url == ''){
        picture_url=$("#postPhoto img").attr('src');
 
@@ -755,10 +756,16 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                             },
                                             success: function (msg) {
                                                 window.location.href=sucessURL;
+                                               // flag=1;
+                                            }, error: function (msg) {
+                                                window.location.href=errorURL;
+                                                //flag=0;
                                             }
                                         });
                                     }
                                 });
+    //if (flag==1){window.location.href=sucessURL;}
+    //if(flag==0){window.location.href=errorURL;}
                                 }
 
 
@@ -791,8 +798,16 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
                                             },
                                             success: function (msg) {
                                                 window.location.href=sucessURL;
+                                               // flag=1;
+
+                                            }, error: function (msg) {
+                                                window.location.href=errorURL;
+                                                //flag=0;
+
                                             }
                                         });
+    //if (flag==1){window.location.href=sucessURL;}
+    //if(flag==0){window.location.href=errorURL;}
         }
 
     }else if(page_type=='twitter'){
