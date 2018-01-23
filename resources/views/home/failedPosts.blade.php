@@ -1,5 +1,8 @@
 @extends('home.layouts.app')
 @section('headScript')
+    <style>
+        .fa{color: blue;}
+    </style>
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -136,7 +139,15 @@
                                 <td><?php echo date('Y-m-d H:i:s', strtotime($record->created_time));?></td>
                                 <td>{{$record->message}}</td>
                                 <td><div>{!!$record->picture ? '<img src="'.$record->picture.'" height="40"/>':''!!}</div></td>
-                                <td><i class="fa fa-facebook" aria-hidden="true"></i></td>
+
+                                <td>
+                                    @if($record->type[0]=='facebook')
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    @elseif($record->type[0]=='twitter')
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    @else
+                                    @endif
+                                </td>
                                 <td>{{$record->appUser['name']}}</td>
                                 <td>{{$record->created_at}}</td>
                             </tr>

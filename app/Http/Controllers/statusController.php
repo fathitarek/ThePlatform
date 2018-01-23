@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use File;
 use Illuminate\Support\Facades\Validator;
 use Auth;
+use App\AppUsersPages;
 
 class statusController extends Controller {
 
@@ -20,6 +21,13 @@ class statusController extends Controller {
     public function publishPosts() {
         try {
             $publish_posts = AppUsersPosts::latest()->where('publish', 1)->where('app_user_id', Auth::guard('AppUsers')->user()->id)->orderBy('created_time', 'desc')->paginate(15);
+           // dd($publish_posts ['page_id']);
+            if(count($publish_posts)) {
+                foreach ($publish_posts as $record) {
+                    $record->type = AppUsersPages::where('page_id', $record->page_id)->pluck('type');
+                }
+            }
+
         } catch (\Exception $ex) {
             $publish_posts = null;
         }
@@ -34,6 +42,12 @@ class statusController extends Controller {
     public function scheduledPosts() {
         try {
             $scheduled_posts = AppUsersPosts::latest()->where('app_user_id', Auth::guard('AppUsers')->user()->id)->where('publish', 0)->where('created_time', '>', date('Y-m-d  H:i:s'))->orderBy('created_time', 'desc')->paginate(15);
+
+            if(count($scheduled_posts)) {
+                foreach ($scheduled_posts as $record) {
+                    $record->type = AppUsersPages::where('page_id', $record->page_id)->pluck('type');
+                }
+            }
         } catch (\Exception $ex) {
             $scheduled_posts = null;
         }
@@ -50,6 +64,12 @@ class statusController extends Controller {
         // dd(date("m/d/Y h:i:s a", time() +5));
         try {
             $failed_posts = AppUsersPosts::latest()->where('app_user_id', Auth::guard('AppUsers')->user()->id)->where('publish', -1)->where('created_time', '<', date('Y-m-d H:i:s a', time() + 5))->orderBy('created_time', 'desc')->paginate(15);
+
+            if(count($failed_posts)) {
+                foreach ($failed_posts as $record) {
+                    $record->type = AppUsersPages::where('page_id', $record->page_id)->pluck('type');
+                }
+            }
         } catch (\Exception $ex) {
             $failed_posts = null;
         }
