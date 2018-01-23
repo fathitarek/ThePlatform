@@ -21,10 +21,11 @@
 |
 
 */
-/*Route::get('/countries', function(){
-    $countries=\App\Countries::all();
-    dd($countries);
-});*/
+Route::get('/testt', function(){
+    //$countries=\App\Countries::all();
+    //dd($countries);
+    return view("home.test");
+});
 
 Route::get('/termsAndConditions', 'HomeController@termsAndConditions');
 Route::get('/support', 'HomeController@support');
@@ -108,7 +109,9 @@ Route::get('/scheduledPostsedit/{id}', 'statusController@editScheduledPosts');
 Route::patch('/scheduledPostsupdate/{id}', 'statusController@updateScheduledPosts');
 Route::get('/failedPosts', 'statusController@failedPosts');
 Route::post('/facebook/csv','uploadcsvFacebookController@import');
- //end route fathi tamora
+     Route::get('getaccesstokenTwitter/{page_id}', 'twitterController@getaccesstoken');
+
+     //end route fathi tamora
 
 });
 

@@ -2181,9 +2181,9 @@ return view('home.scheduled_posts',compact('userposts'));
             ->select('accessToken')
             ->where ([['app_users.id','=',Auth::guard('AppUsers')->user()->id],["page_id","=",$page_id]])
             ->limit(1)
-            ->get('accessToken');
+           ->get('accessToken');
 
-        //return $accesstoken ;
+       // dd($accesstoken) ;
         return $accesstoken->get(0)->accessToken ;
 }
 
