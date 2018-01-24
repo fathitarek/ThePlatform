@@ -812,7 +812,90 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
 
     }else if(page_type=='twitter'){
 
+    token= 'csrf_token()';
+    if(scheduleDate=='now' && categoryid ==''){
+        publish=1;
+        if(typeof scheduleDateTime=='undefined' || scheduleDateTime==''){
+            newDate=new Date();
+            scheduleDateTime=newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate()+' '+newDate.getHours()+':'+newDate.getMinutes();
+        }
+//Twitter.prototype.makeTweet = function (text_tweet,image_url, fun) {
 
+        Twitter.makeTweet(page_id,message,scheduleDate,picture_url,function(page_id,data){
+            console.log(data);
+
+            if(data.error){
+                $("#errorMessage").html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.error.message+'</div>');
+            }else{
+                post_id =(typeof picture_url=='undefined')? data.id:data.post_id;
+                resource_id=(typeof resource_id=='undefined')?0:resource_id;
+                $.ajax({
+                    type: "POST",
+                    url: URL+'/addPost',
+                    //url: '../addPost',
+                    data: {
+                        "page_id": page_id,
+                        "message": message,
+                        "publish": publish,
+                        "scheduleDateTime": scheduleDateTime,
+                        "post_id": post_id,
+                        "resource_id": resource_id,
+                        //_token: $('meta[name="csrf-token"]').attr('content')
+                        _token: mytoken
+                    },
+                    success: function (msg) {
+                        window.location.href=sucessURL;
+                        // flag=1;
+                    }, error: function (msg) {
+                        window.location.href=errorURL;
+                        //flag=0;
+                    }
+                });
+            }
+        });
+        //if (flag==1){window.location.href=sucessURL;}
+        //if(flag==0){window.location.href=errorURL;}
+    }
+
+
+
+
+
+
+
+    else {
+        publish = 0;
+        if (categoryid != '') {
+            scheduleDateTime = 'catogrized';
+
+        }
+        console.log(page_id, message, scheduleDate);
+        $.ajax({
+            type: "POST",
+            url: URL + '/addPost',
+            //url: '../addPost',
+            data: {
+                "page_id": page_id,
+                "message": message,
+                "publish": publish,
+                "scheduleDateTime": scheduleDateTime,
+                "category_id": categoryid,
+                "post_id": '132',
+                "resource_id": '145',
+                //_token: $('meta[name="csrf-token"]').attr('content')
+                _token: mytoken
+            },
+            success: function (msg) {
+                window.location.href = sucessURL;
+                // flag=1;
+
+            }, error: function (msg) {
+                window.location.href = errorURL;
+                //flag=0;
+
+            }
+        });
+    }
 
 
     }else if (page_type=='instagram') {
