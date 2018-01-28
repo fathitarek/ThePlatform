@@ -44,7 +44,7 @@
                     </div>
                     <span _ngcontent-c25="" class="step-subhead" translate="">Tell us for which profile you want to upload the CSV</span>
                     <div _ngcontent-c25="" style="height:20px;"></div>
-                        <form method="post" action="{{ url('/facebook/csv') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ url('/twitter/csv') }}" enctype="multipart/form-data">
                             <select required name="page_id">
                                 <option value=""> Choose Account</option>
                                 @foreach($pages as $page)

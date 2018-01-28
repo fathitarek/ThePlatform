@@ -38,7 +38,7 @@ class twitterController extends Controller
         echo'<script>var URL="' . URL('') . '"</script>';
         $input = $request->all();
         //  dd($input['_token']);
-        $AppUsersPosts = new AppUsersPosts();
+      //  $AppUsersPosts = new AppUsersPosts();
         $flag=0;
         if (!is_null(Input::file('csv_file'))) {
             //if success return filename as String  if fail return false (function in helper.php )
@@ -66,12 +66,21 @@ class twitterController extends Controller
         }
         for ($i = 0; $i < count($posts_from_file); $i++) {
             if ($flag == count($posts_from_file) && $input['date_time'] == '1') {
-                echo '<script type="text/javascript" src="/js/twitter.js"></script><script>
-                        create_post("facebook","","' . $posts_from_file[$i]['created_time'] . '","' . $posts_from_file[$i]['picture'] . '","0","' . $input['page_id'] . '","' . $posts_from_file[$i]['message'] . '","","' . $input['_token'] . '","/facebook_csvFile?submit=1","/facebook_csvFile?submit=0");
+                // TIME BASED
+                echo '<script type="text/javascript" src="/js/addPostAddDatabase.js"></script><script>
+// addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token)
+
+addPostToDataBase("'.$input['page_id'].'","'.$posts_from_file[$i]['message'].'","0","'.$posts_from_file[$i]['created_time'].'","0","0","' . $posts_from_file[$i]['picture'] . '","'.$input['_token'].'","","/twitter_csv?submit=1","/twitter_csv?submit=0");
                         </script>';
             } elseif ($flag == count($posts_from_file) && $input['date_time'] == '0') {
-                echo '<script type="text/javascript" src="/js/twitter.js"></script><script>
-//                        create_post("facebook","","","' . $posts_from_file[$i]['picture'] . '","0","' . $input['page_id'] . '","' . $posts_from_file[$i]['message'] . '","' . $input['category_id'] . '","' . $input['_token'] . '","/facebook_csvFile?submit=1","/facebook_csvFile?submit=0");
+                /*dump($input['page_id']);
+                dump($posts_from_file[$i]['message']);
+                dump($input['category_id']);
+                dd($input['_token']);*/
+                echo '<script type="text/javascript" src="/js/addPostAddDatabase.js"></script><script>
+// addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token) 0000-0-00 00:00
+
+                        addPostToDataBase("'.$input['page_id'].'","'.$posts_from_file[$i]['message'].'","0","0000-0-00 00:00","0","0","' . $posts_from_file[$i]['picture'] . '","'.$input['_token'].'","' . $input['category_id'] . '","/twitter_csv?submit=1","/twitter_csv?submit=0");
 //                        </script>';
             } else {
                 return redirect('/twitter_csv')->with('fail', 'Not Complete data in file!');

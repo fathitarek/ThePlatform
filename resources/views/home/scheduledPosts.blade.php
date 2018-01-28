@@ -161,9 +161,9 @@
                                     <a href='{{ URL('/scheduledPostsDelete/'.$record->id) }}' class='btn btn-default btn-xs'><i class="fa fa-trash"></i></a>
                                     <a href='{{ URL('/scheduledPostsedit/'.$record->id) }}' class='btn btn-default btn-xs'><i class="fa fa-edit"></i></a>
                                     @if(!empty($record->picture))
-                                        <a href='#'  data-post_id='{{ $record->id }}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="fa fa-triangle-right"></i></a>
+                                        <a href='#'  data-type='{{$record->type[0]}}' data-post_id='{{ $record->id }}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="fa fa-triangle-right"></i></a>
                                     @else
-                                        <a href='#'  data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}'   data-post_id='{{ $record->id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="fa  fa-caret-right"></i></a>
+                                        <a href='#' data-type='{{$record->type[0]}}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}'   data-post_id='{{ $record->id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="fa  fa-caret-right"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -244,9 +244,16 @@
                 var picture = $(this).data('picture');
                 var message = $(this).data('message');
                 var page_id = $(this).attr('data-page-id');
+                var type=$(this).attr('data-type');
                 console.log(picture); console.log(message); console.log(page_id);console.log(post_id);
+                alert(type);
                 //alert(picture);
-                facebookposttopage(page_id);
+                if(type=='facebook') {
+                    facebookposttopage(page_id);
+                }
+                if(type=='twitter') {
+                    facebookposttopage(page_id);
+                }
 //    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
 //    console.log('fn '+update);
 //    if (update) {
