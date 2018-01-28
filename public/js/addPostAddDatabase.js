@@ -21,7 +21,7 @@ function addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id,
             category_id:category_id
         },
         success: function (msg) {
-             window.location.href=sucessURL;
+            // window.location.href=sucessURL;
             //alert("success");
             console.log("msg   " + msg.success);
             if (msg.success == false){
@@ -33,13 +33,13 @@ function addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id,
 //                                                    type:"POST",
 //                                                    url:""
 //                                                });
-                window.location.href=errorURL;
+               // window.location.href=errorURL;
             }
         },
         error: function (msg) {
            // alert("error");
             console.log("msg" + msg);
-              window.location.href=errorURL;
+             // window.location.href=errorURL;
         }
     });
 }

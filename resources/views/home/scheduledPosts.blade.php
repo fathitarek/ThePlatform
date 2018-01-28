@@ -1,5 +1,8 @@
 @extends('home.layouts.app')
 @section('headScript')
+    <script src=" {{ asset('js/twitter.js') }}"></script>
+    <script src=" {{ asset('js/addPostAddDatabase.js') }}"></script>
+
     <style>
         /*.fa{color: blue;}*/
     </style>
@@ -184,7 +187,70 @@
     <script>
         function init(){}
 
+function twitterPost(page_id){
+        var picture_url = $(this).data('picture');
+        var message = $(this).data('message');
+    var post_id = $(this).data('post_id');
+   // var page_id = $(this).attr('data-page-id');
+    Twitter.makeTweet(message, picture_url, function(reply, rate, err) {
+        console.log("in");
+        // console.log(reply.errors);
+        reply = JSON.parse(JSON.stringify(reply));
+        console.log("inin");
+        if (reply.errors && reply.errors['0'].code == 187) {
+            changeMessageToUser('This post already exist');
+        }else{
+            // console.log("twitter1", reply.errors[0].code);
+            // console.log("twitter", reply);
+           // post_id = (typeof post_id == 'undefined') ? reply.id : reply.post_id;
+            //resource_id = (typeof resource_id == 'undefined') ? 0 : resource_id;
+           // category_id = (typeof category_id == 'undefined') ? 0 : category_id;
+            var category_id='';
+            var resource_id=0;
+            var publish=1;
+            picture_url = (typeof picture_url == 'undefined') ? 0 : picture_url;
+            errorURL=(typeof errorURL == 'undefined') ? '/' : errorURL;
+            sucessURL=(typeof sucessURL == 'undefined') ? '/?submit=1' : sucessURL;
+           // newDate=new Date();
+          // var  scheduleDateTime=newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate()+' '+newDate.getHours()+':'+newDate.getMinutes();
 
+
+          //  var message = $(this).data('message');
+
+            if (typeof scheduleDateTime == 'undefined' || scheduleDateTime == '') {
+                var newDate = new Date();
+                scheduleDateTime = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate() + ' ' + newDate.getHours() + ':' + newDate.getMinutes();
+            }
+            addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,"/scheduledPosts?submit=1","/scheduledPosts?submit=0");
+            //  consol                    e.log(page_id);
+            //  cons                    ole.log(message);
+            //  co                    nsole.log(publish);
+            console.log("scheduleDateTime" + scheduleDateTime);
+            console.log(picture_url);
+            console.log(token);
+        }
+        {{--$.ajax({--}}
+        {{--type: "POST", --}}
+        {{--url: "{{ URL('addPost') }}", --}}
+        {{--data: --}}
+        {{--"page_id": page_id, --}}
+        {{--"me                    ssage": message, --}}
+        {{-- "publish": publish--}}
+        {{--"scheduleDateTime": scheduleDateTime, - - }}
+        {{--"post_id": post_id, --}}
+        {{--"resource_id": resource_id, --}}
+        {{--"picture_url": picture_url, --}}
+        {{--_                    token: token--}}
+        {{--}, --}}
+        {{--success: function (msg) {--}}
+        {{--alert("done"); --}}
+        {{--}, --}}
+        {{--error: function (msg) {--}}
+        {{--alert("no"); --}}
+        {{--}--}}
+        {{--}); --}}
+    });
+}
         function facebookposttopage(page_id)
         {
             //get access token
@@ -252,7 +318,7 @@
                     facebookposttopage(page_id);
                 }
                 if(type=='twitter') {
-                    facebookposttopage(page_id);
+                    twitterPost(page_id);
                 }
 //    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
 //    console.log('fn '+update);
