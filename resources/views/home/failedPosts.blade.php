@@ -1,7 +1,7 @@
 @extends('home.layouts.app')
 @section('headScript')
     <style>
-        .fa{color: blue;}
+        /*.fa{color: blue;}*/
     </style>
     <script>
         window.fbAsyncInit = function() {
