@@ -110,6 +110,8 @@ Route::patch('/scheduledPostsupdate/{id}', 'statusController@updateScheduledPost
 Route::get('/failedPosts', 'statusController@failedPosts');
 Route::post('/facebook/csv','uploadcsvFacebookController@import');
      Route::get('getaccesstokenTwitter/{page_id}', 'twitterController@getaccesstoken');
+     Route::get('/twitter_csv', 'twitterController@csvPage');
+
 
      //end route fathi tamora
 
