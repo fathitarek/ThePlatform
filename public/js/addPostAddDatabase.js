@@ -5,7 +5,6 @@
 function addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,sucessURL,errorURL){
     category_id = (typeof category_id == 'undefined') ? 0 : category_id;
     var URL= window.location;
-    console.log("url "+URL);
     $.ajax({
         type: "POST",
         url: '../addPost',
@@ -39,7 +38,33 @@ function addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id,
         error: function (msg) {
            // alert("error");
             console.log("msg" + msg);
-             // window.location.href=errorURL;
+             window.location.href=errorURL;
+        }
+    });
+}
+function updatePostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,sucessURL,errorURL){
+    $.ajax({
+        type: "POST",
+        url: './updatepost/'+post_id,
+        data: {
+            "page_id": page_id,
+            "message": message,
+            "publish": publish,
+            "scheduleDateTime": scheduleDateTime,
+            "post_id": post_id,
+            "resource_id": resource_id,
+            "picture_url": picture_url,
+            _token: token,
+            category_id:category_id
+        },
+        success: function (msg) {
+            console.log("msg   " + msg.success);
+            window.location.href=sucessURL;
+        },
+        error: function (msg) {
+            // alert("error");
+            console.log("msg" + msg);
+            // window.location.href=errorURL;
         }
     });
 }

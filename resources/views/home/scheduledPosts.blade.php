@@ -164,9 +164,9 @@
                                     <a href='{{ URL('/scheduledPostsDelete/'.$record->id) }}' class='btn btn-default btn-xs'><i class="fa fa-trash"></i></a>
                                     <a href='{{ URL('/scheduledPostsedit/'.$record->id) }}' class='btn btn-default btn-xs'><i class="fa fa-edit"></i></a>
                                     @if(!empty($record->picture))
-                                        <a href='#'  data-type='{{$record->type[0]}}' data-post_id='{{ $record->id }}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="fa fa-triangle-right"></i></a>
+                                        <a href='#' id="post_{{$record->id}}"  data-type='{{$record->type[0]}}' data-post_id='{{ $record->id }}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}' data-message='{{ $record->message }}'   class='btn btn-default btn-xs sendNow'><i class="fa fa-triangle-right"></i></a>
                                     @else
-                                        <a href='#' data-type='{{$record->type[0]}}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}'   data-post_id='{{ $record->id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="fa  fa-caret-right"></i></a>
+                                        <a href='#' id="post_{{$record->id}}" data-type='{{$record->type[0]}}' data-picture='{{ $record->picture }}' data-page-id='{{ $record->page_id }}'   data-post_id='{{ $record->id }}' data-message='{{ $record->message }}'  id="" class='btn btn-default btn-xs sendNow'><i class="fa  fa-caret-right"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -186,11 +186,40 @@
 @section('scriptCode')
     <script>
         function init(){}
-
-function twitterPost(page_id){
-        var picture_url = $(this).data('picture');
-        var message = $(this).data('message');
-    var post_id = $(this).data('post_id');
+        function getAccessTokenTwitter(page_id,post_id)
+        {
+            //get access token
+            $.ajax({
+                type: "GET",
+                url: "{{ URL('getaccesstokenTwitter') }}/" + page_id,
+                data: {
+                    "page_id": page_id,
+                    _token: token
+                },
+                success: function (msg) {
+                    //console.log('assign access token:',page_id,msg);
+                    var json = JSON.parse(msg);
+                    console.log(json);
+                    console.log(json.oauth_token_secret.toString());
+                    oauth_token = json.oauth_token;
+                    oauth_token_secret = json.oauth_token_secret;
+                    Twitter.setAccessToken(json.oauth_token, json.oauth_token_secret);
+                    Twitter.initializeCodeBird({oauth_token:oauth_token, oauth_token_secret:oauth_token_secret});
+                    addPostOnTwitter(page_id,post_id);
+                },
+                error: function (msg) {
+                    console.log('error :', msg);
+                    alert('error :', msg);
+                },
+            });
+            //get access token
+        }
+function addPostOnTwitter(page_id,post_id){
+        var picture_url = $('#post_'+post_id).data('picture');
+        var message = $('#post_'+post_id).data('message');
+    console.log("messaaaagee"+message);
+   // var post_id = $('.sendNow').data('post_id');
+    console.log("post id  "+post_id);
    // var page_id = $(this).attr('data-page-id');
     Twitter.makeTweet(message, picture_url, function(reply, rate, err) {
         console.log("in");
@@ -221,10 +250,12 @@ function twitterPost(page_id){
                 var newDate = new Date();
                 scheduleDateTime = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate() + ' ' + newDate.getHours() + ':' + newDate.getMinutes();
             }
-            addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,"/scheduledPosts?submit=1","/scheduledPosts?submit=0");
+             updatePostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,"/scheduledPosts?submit=1","/scheduledPosts?submit=0");
+          //  addPostToDataBase(page_id, message, publish, scheduleDateTime, post_id, resource_id, picture_url, token,category_id,"/scheduledPosts?submit=1","/scheduledPosts?submit=0");
             //  consol                    e.log(page_id);
             //  cons                    ole.log(message);
             //  co                    nsole.log(publish);
+            //updatePostToDataBase(post_id,resource_id,"/scheduledPosts?submit=1","/scheduledPosts?submit=0");
             console.log("scheduleDateTime" + scheduleDateTime);
             console.log(picture_url);
             console.log(token);
@@ -304,7 +335,6 @@ function twitterPost(page_id){
             });
             $('.sendNow').click(function(e){
                 e.preventDefault();
-                //alert("rthjrhr");
                 console.log("asdasda")
                 var post_id = $(this).data('post_id');
                 var picture = $(this).data('picture');
@@ -318,7 +348,7 @@ function twitterPost(page_id){
                     facebookposttopage(page_id);
                 }
                 if(type=='twitter') {
-                    twitterPost(page_id);
+                    getAccessTokenTwitter(page_id,post_id);
                 }
 //    var update=update_post("facebook", "now", "", "", "", page_id, message, "",post_id);
 //    console.log('fn '+update);
@@ -339,7 +369,12 @@ function twitterPost(page_id){
         });
 
 
-
+        function changeMessageToUser(message){
+            $(".alert-success").html(message);
+            $(".alert-success").css("background-color", "#f2dede");
+            $(".alert-success").css("color", "#a94442");
+            $(".alert-success").css("border-color", "#e6c1c1");
+        }
     </script>
 
 @endsection
