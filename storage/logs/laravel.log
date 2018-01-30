@@ -17491,3 +17491,30 @@ Stack trace:
 #53 C:\Users\Fathy.Tarek\Desktop\ThePlatform\public\index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #54 C:\Users\Fathy.Tarek\Desktop\ThePlatform\server.php(21): require_once('C:\\Users\\Fathy....')
 #55 {main}  
+[2018-01-30 10:55:00] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Arr.php:219
+Stack trace:
+#0 {main}  
+[2018-01-30 11:01:08] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Str.php:94
+Stack trace:
+#0 {main}  
+[2018-01-30 11:04:23] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:0
+Stack trace:
+#0 {main}  
+[2018-01-30 11:06:57] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Database\Grammar.php:58
+Stack trace:
+#0 {main}  
+[2018-01-30 11:08:31] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Arr.php:219
+Stack trace:
+#0 {main}  
+[2018-01-30 11:09:49] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Collection.php:663
+Stack trace:
+#0 {main}  
+[2018-01-30 11:17:31] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:77
+Stack trace:
+#0 {main}  
+[2018-01-30 11:18:46] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Database\Connection.php:319
+Stack trace:
+#0 {main}  
+[2018-01-30 11:27:18] local.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Maximum execution time of 60 seconds exceeded in C:\Users\Fathy.Tarek\Desktop\ThePlatform\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:128
+Stack trace:
+#0 {main}  

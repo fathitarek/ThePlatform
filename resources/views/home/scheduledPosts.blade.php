@@ -342,7 +342,7 @@ function addPostOnTwitter(page_id,post_id){
                 var page_id = $(this).attr('data-page-id');
                 var type=$(this).attr('data-type');
                 console.log(picture); console.log(message); console.log(page_id);console.log(post_id);
-                alert(type);
+               // alert(type);
                 //alert(picture);
                 if(type=='facebook') {
                     facebookposttopage(page_id);
