@@ -145,6 +145,14 @@
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
                                     @elseif($record->type[0]=='twitter')
                                         <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    @elseif($record->type[0]=='linkedin')
+                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    @elseif($record->type[0]=='google')
+                                        <i class="fa fa-google" aria-hidden="true"></i>
+                                    @elseif($record->type[0]=='youtube')
+                                        <i class="fa fa-youtube" aria-hidden="true"></i>
+                                    @elseif($record->type[0]=='instagram')
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
                                     @else
                                     @endif
                                 </td>
