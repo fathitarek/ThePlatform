@@ -696,7 +696,7 @@ $userposts=AppUsersPosts::where([
         $json=json_decode($data['data']);
         $appUsersProfiles=[];
         foreach($json as $item){
-            if(!in_array($item->type,['facebook','twitter','google','instagram','linkedin','youtube'])){
+            if(!in_array($item->type,['facebook','twitter','google','instagram','linkedin','youtube','VK'])){
                 return response()->json(['message'=>Lang::get('home.failed'),'success'=>false])->setCallback($request->input('callback'));
                 break;
             }
@@ -766,6 +766,25 @@ $userposts=AppUsersPosts::where([
                 ];
             }
               break;
+                case 'VK':
+                    $appUserProfile=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
+                    if(!count($appUserProfile)){
+                        $appUsersProfiles[]=[
+                            'app_user_id'=>Auth::guard('AppUsers')->user()->id,
+                            'page_id'=>$item->id,
+                            'page_name'=>$item->name,
+                            'page_image_url'=>$item->image_url,
+                            'oauth_token'=>$data['accessToken'],
+                            'oauth_token_secret'=>$data['accessTokenSecret'],
+                            'user_id'=>$data['userID'],
+                            'expired_in'=>$data['expiresIn'],
+                            'type'=>$item->type,
+                            'add_date'=>date('Y-m-d H:i:s'),
+                            'created_at'=>date('Y-m-d H:i:s'),
+                            'updated_at'=>date('Y-m-d H:i:s'),
+                        ];
+                    }
+                break;
                 default:
                     $appUsersPage=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
                     if(!count($appUsersPage)){
