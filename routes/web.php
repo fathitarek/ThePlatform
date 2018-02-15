@@ -21,18 +21,20 @@
 |
 
 */
-Route::get('/testt', function(){
-    //$countries=\App\Countries::all();
-    //dd($countries);
-    return view("home.test");
-});
-
+/*Route::get('/countries', function(){
+    $countries=\App\Countries::all();
+    dd($countries);
+});*/
+/*Route::get('/uploadeData',function(){
+   dd(DB::select('ALTER TABLE `app_users_posts_resources`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;'));
+});*/
 Route::get('/termsAndConditions', 'HomeController@termsAndConditions');
 Route::get('/support', 'HomeController@support');
 Route::get('/privacy', 'HomeController@privacy');
 Route::get('/scheduledpostss', 'HomeController@scheduledposts');
 Route::get('/cron', 'HomeController@cron');
-Route::get('/cron2', 'HomeController@test');
+Route::get('/cron2', 'HomeController@cron2');
 
 Route::get('/getaccesstoken1/{page_id}', 'HomeController@getaccesstoken1');
 Route::post('/getaccesstoken1/{page_id}', 'HomeController@getaccesstoken1');
@@ -93,7 +95,9 @@ Route::post('register', 'HomeController@register');
     Route::post('addProfilePosts', 'HomeController@addProfilePosts');
     Route::post('saveAccessToken', 'HomeController@saveAccessToken');
 
-
+Route::get('getaccesstokenTwitter/{page_id}', 'twitterController@getaccesstoken');
+     Route::get('/twitter_csv', 'twitterController@csvPage');
+     Route::post('/twitter/csv','twitterController@import');
 
     //Route::post('saveTokenNumber', 'HomeController@saveTokenNumber');
 
@@ -109,18 +113,12 @@ Route::get('/scheduledPostsedit/{id}', 'statusController@editScheduledPosts');
 Route::patch('/scheduledPostsupdate/{id}', 'statusController@updateScheduledPosts');
 Route::get('/failedPosts', 'statusController@failedPosts');
 Route::post('/facebook/csv','uploadcsvFacebookController@import');
-     Route::get('getaccesstokenTwitter/{page_id}', 'twitterController@getaccesstoken');
-     Route::get('/twitter_csv', 'twitterController@csvPage');
-     Route::post('/twitter/csv','twitterController@import');
-
-
-
-     //end route fathi tamora
+ //end route fathi tamora
 
 });
 
 /*auth routes*/
-Auth::routes();
+//Auth::routes();
 /*authentication routes*/
 Route::group(['middleware' => 'PermissionsAuth'], function () {
     /*home page admin route*/

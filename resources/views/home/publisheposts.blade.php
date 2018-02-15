@@ -118,7 +118,7 @@
 				   
 				   $.ajax({
                                             type: "POST",
-                                            url: './updatepost1/'+postid,
+                                            url: '{{ URL('updatepost1') }}/'+postid,
                                             data: {
                                                 "page_id": page_id,
                                                 "message": message,

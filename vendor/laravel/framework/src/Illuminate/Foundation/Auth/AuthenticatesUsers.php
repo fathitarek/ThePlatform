@@ -142,7 +142,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'username';
+        return 'email';
     }
 
     /**
@@ -157,7 +157,7 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
-        return redirect('/admin');
+        return redirect('/');
     }
 
     /**

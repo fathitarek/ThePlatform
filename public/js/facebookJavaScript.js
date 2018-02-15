@@ -268,42 +268,98 @@ FB.api('/oauth/access_token','GET',{grant_type:'fb_exchange_token',client_id:'15
         this.customRequest('/me/feed','POST',payload,function(data){fun(data)});
 
     },
+    uploadPicture:function(pageID,picture_url,access_token,func){
+        t.customRequest(String(pageID)+'/photos','POST',{"access_token":access_token,"url":picture_url,"caption":"","published":false},function(data){
+           //console.log(data);
+            func(data.id)
+        })
+    },
+    asyncLoop:function (iterations, func, callback) {
+        var index = 0;
+        var done = false;
+        var loop = {
+            next: function() {
+                if (done) {
+                    return;
+                }
+                if (index < iterations) {
+                    index++;
+                    func(loop);
 
+                } else {
+                    done = true;
+                    callback();
+                }
+            },
+
+            iteration: function() {
+                return index - 1;
+            },
+
+            break: function() {
+                done = true;
+                callback();
+            }
+        };
+        loop.next();
+        return loop;
+    },
     shareInPage:function(pageID,message,scheduleDate,picture_url,fun){
 
         t=this;
 
         t.customRequest(String(pageID),'GET',{"fields":"access_token"},function(d){
-            dataSend={"message": message,"access_token": d.access_token}
-
-            if(typeof picture_url==='function'||typeof picture_url=='undefined'){
-
-                fun=(typeof picture_url=='undefined')?fun:picture_url;
-                requestURL=pageID+'/feed';
-
+            if(typeof picture_url=='object'){
+                attached_media=[];
+                x=0;
+                t.asyncLoop(picture_url.length,function(loop){
+                    t.uploadPicture(String(pageID),picture_url[x],d.access_token,function(id){
+                        attached_media.push({media_fbid:id});
+                        //console.log("id");
+                        //console.log(id);
+                        //console.log("x");
+                        //console.log(x);
+                        x++;
+                        loop.next();
+                    });
+                },function(){
+                    //console.log(data);
+                    t.customRequest(String(pageID)+'/feed','POST',{"message": message,attached_media:attached_media,"access_token": d.access_token},function(data){fun(data);})
+                })
             }else{
+                dataSend={"message": message,"access_token": d.access_token}
 
-                dataSend.url=picture_url;
-                requestURL=pageID+'/photos';
+                if(typeof picture_url==='function'||typeof picture_url=='undefined'){
+
+                    fun=(typeof picture_url=='undefined')?fun:picture_url;
+                    requestURL=pageID+'/feed';
+
+                }else{
+
+                    //dataSend.url=picture_url;
+                    //requestURL=pageID+'/photos';
+                    requestURL=pageID+'/feed';
+
+                }
+
+                /* ------------islam --------------------------
+                 if(scheduleDate!='now'){
+
+                 dataSend.published=false;
+
+                 dataSend.scheduled_publish_time=scheduleDate;
+
+                 }
+                 */
+                //console.log(requestURL);
+
+                //console.log(dataSend);
+
+                //console.log(picture_url);
+
+                t.customRequest(requestURL,'POST',dataSend,function(data){fun(data);})
 
             }
-
-          /* ------------islam --------------------------
-           if(scheduleDate!='now'){
-
-                dataSend.published=false;
-
-                dataSend.scheduled_publish_time=scheduleDate;
-
-            }
-*/
-            //console.log(requestURL);
-
-            //console.log(dataSend);
-
-            //console.log(picture_url);
-
-            t.customRequest(requestURL,'POST',dataSend,function(data){fun(data);})
 
         });
 
@@ -312,7 +368,7 @@ FB.api('/oauth/access_token','GET',{grant_type:'fb_exchange_token',client_id:'15
 
     getGroupsList:function(fun){
       
-      this.customRequest('/me/groups','GET',function(group){
+      this.customRequest('/me/groups','GET',{"fields":this.pageScope},function(group){
       
       fun(group)
 
@@ -329,6 +385,14 @@ FB.api('/oauth/access_token','GET',{grant_type:'fb_exchange_token',client_id:'15
         });
 
     },
+
+//get id and name only.....
+    getmyprofile:function(fun){
+        this.customRequest('/me','GET',{"fields":"name,picture"},function(data){ 
+            fun(data)
+        });
+    },
+
 
     getPageDetails:function(pageID,scope,fun){
 
@@ -812,90 +876,7 @@ FaceBook.postToPageSchedule(page_id,message,scheduleDate,picture_url,function(pa
 
     }else if(page_type=='twitter'){
 
-    token= 'csrf_token()';
-    if(scheduleDate=='now' && categoryid ==''){
-        publish=1;
-        if(typeof scheduleDateTime=='undefined' || scheduleDateTime==''){
-            newDate=new Date();
-            scheduleDateTime=newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate()+' '+newDate.getHours()+':'+newDate.getMinutes();
-        }
-//Twitter.prototype.makeTweet = function (text_tweet,image_url, fun) {
 
-        Twitter.makeTweet(page_id,message,scheduleDate,picture_url,function(page_id,data){
-            console.log(data);
-
-            if(data.error){
-                $("#errorMessage").html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+data.error.message+'</div>');
-            }else{
-                post_id =(typeof picture_url=='undefined')? data.id:data.post_id;
-                resource_id=(typeof resource_id=='undefined')?0:resource_id;
-                $.ajax({
-                    type: "POST",
-                    url: URL+'/addPost',
-                    //url: '../addPost',
-                    data: {
-                        "page_id": page_id,
-                        "message": message,
-                        "publish": publish,
-                        "scheduleDateTime": scheduleDateTime,
-                        "post_id": post_id,
-                        "resource_id": resource_id,
-                        //_token: $('meta[name="csrf-token"]').attr('content')
-                        _token: mytoken
-                    },
-                    success: function (msg) {
-                        window.location.href=sucessURL;
-                        // flag=1;
-                    }, error: function (msg) {
-                        window.location.href=errorURL;
-                        //flag=0;
-                    }
-                });
-            }
-        });
-        //if (flag==1){window.location.href=sucessURL;}
-        //if(flag==0){window.location.href=errorURL;}
-    }
-
-
-
-
-
-
-
-    else {
-        publish = 0;
-        if (categoryid != '') {
-            scheduleDateTime = 'catogrized';
-
-        }
-        console.log(page_id, message, scheduleDate);
-        $.ajax({
-            type: "POST",
-            url: URL + '/addPost',
-            //url: '../addPost',
-            data: {
-                "page_id": page_id,
-                "message": message,
-                "publish": publish,
-                "scheduleDateTime": scheduleDateTime,
-                "category_id": categoryid,
-                "post_id": '132',
-                "resource_id": '145',
-                //_token: $('meta[name="csrf-token"]').attr('content')
-                _token: mytoken
-            },
-            success: function (msg) {
-                window.location.href = sucessURL;
-                // flag=1;
-
-            }, error: function (msg) {
-                window.location.href = errorURL;
-                //flag=0;
-
-            }
-        });
-    }
 
 
     }else if (page_type=='instagram') {

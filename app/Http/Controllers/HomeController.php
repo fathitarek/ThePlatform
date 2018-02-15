@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\AppUsersPostsResources;
 use App\User;
 use App\AppUsers;
 use App\AppUsersPages;
@@ -45,6 +46,7 @@ class HomeController extends Controller
         $countries=Countries::where('active',1)->get();
         return view('home.login',compact('countries','userSocialData','userSocialType'));
     }
+
     public function loginPost(Request $request){
         $data=$request->input();
         $validator = Validator::make($request->all(),
@@ -696,7 +698,7 @@ $userposts=AppUsersPosts::where([
         $json=json_decode($data['data']);
         $appUsersProfiles=[];
         foreach($json as $item){
-            if(!in_array($item->type,['facebook','twitter','google','instagram','linkedin','youtube','VK'])){
+            if(!in_array($item->type,['facebook','twitter','google','instagram','linkedin','linkedin_company','youtube','VK'])){
                 return response()->json(['message'=>Lang::get('home.failed'),'success'=>false])->setCallback($request->input('callback'));
                 break;
             }
@@ -765,8 +767,40 @@ $userposts=AppUsersPosts::where([
                     'updated_at'=>date('Y-m-d H:i:s'),
                 ];
             }
+
+
               break;
-                case 'VK':
+
+
+//case linked-------------------------------
+            case 'linkedin':
+
+
+    $appUserProfile=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
+            if(!count($appUserProfile)){
+                $appUsersProfiles[]=[
+                    'app_user_id'=>Auth::guard('AppUsers')->user()->id,
+                    'page_id'=>$item->id,
+                    'page_name'=>$item->name,
+                    'page_image_url'=>$item->image_url,
+                    'oauth_token'=>$data['accessToken'],
+                    'oauth_token_secret'=>$data['accessTokenSecret'],
+                    'user_id'=>$data['userID'],
+                    'expired_in'=>$data['expiresIn'],
+                    'type'=>$item->type,
+                    'add_date'=>date('Y-m-d H:i:s'),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ];
+
+}
+
+
+
+              break;
+                case 'linkedin_company':
+
+
                     $appUserProfile=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
                     if(!count($appUserProfile)){
                         $appUsersProfiles[]=[
@@ -783,8 +817,44 @@ $userposts=AppUsersPosts::where([
                             'created_at'=>date('Y-m-d H:i:s'),
                             'updated_at'=>date('Y-m-d H:i:s'),
                         ];
+
                     }
-                break;
+
+
+
+                    break;
+
+//case linked ---------------------------------
+
+//case VK
+
+
+            case 'VK':
+
+
+    $appUserProfile=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
+            if(!count($appUserProfile)){
+                $appUsersProfiles[]=[
+                    'app_user_id'=>Auth::guard('AppUsers')->user()->id,
+                    'page_id'=>$item->id,
+                    'page_name'=>$item->name,
+                    'page_image_url'=>$item->image_url,
+                    'oauth_token'=>$data['accessToken'],
+                    'oauth_token_secret'=>$data['accessTokenSecret'],
+                    'user_id'=>$data['userID'],
+                    'expired_in'=>$data['expiresIn'],
+                    'type'=>$item->type,
+                    'add_date'=>date('Y-m-d H:i:s'),
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s'),
+                ];
+
+}
+
+//case VK
+
+
+              break;
                 default:
                     $appUsersPage=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$item->id)->get();
                     if(!count($appUsersPage)){
@@ -868,7 +938,7 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
         $validator = Validator::make($request->all(),
             array(
                 'page_id'=>'required',
-                'resource_id'=>'required',
+               // 'resource_ids'=>'required',
                 'post_id'=>'required',
                 'message'=>'required',
                 'publish'=>'required',
@@ -882,7 +952,6 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
             $messages.='</ul>';
             return response()->json(['message'=>$messages,'success'=>false])->setCallback($request->input('callback'));
         }else{
-
         /*    
            if(isset($data['category_id'])){
             $appPosts=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->orderBy('id', 'DESC')->first();
@@ -1110,7 +1179,7 @@ goto start;
                 $appUserPosts->publish=$data['publish'];
                 $appUserPosts->page_id=$data['page_id'];
                 $appUserPosts->post_id=$data['post_id'];
-                $appUserPosts->resource_id=$data['resource_id'];
+                $appUserPosts->resource_id=(isset($data['resource_ids'][0]))?$data['resource_ids'][0]:0;
                 $appUserPosts->message=$data['message'];
                 if(isset($data['category_id'])){              
                 $appUserPosts->category_id=$data['category_id'];
@@ -1135,6 +1204,16 @@ if(isset($schedule_date)){
                 $appUserPosts->add_by=Auth::guard('AppUsers')->user()->id;
                 $appUserPosts->add_date=date('Y-m-d H:i:s');
                 if($appUserPosts->save()){
+                    if(isset($data['resource_ids'])){
+                    foreach($data['resource_ids'] as $resource_id){
+                        $appUsersPostsResources=new AppUsersPostsResources();
+                        $appUsersPostsResources->app_users_post_id=$appUserPosts->id;
+                        $appUsersPostsResources->resource_id=$resource_id;
+                        $appUsersPostsResources->add_by=Auth::guard('AppUsers')->user()->id;
+                        $appUsersPostsResources->add_date=date('Y-m-d H:i:s');
+                        $appUsersPostsResources->save();
+                    }
+                }
                     return response()->json(['message'=>Lang::get('home.success'),'success'=>true])->setCallback($request->input('callback'));
                 }
             }

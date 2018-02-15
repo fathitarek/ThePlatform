@@ -89,9 +89,9 @@ $.fn.mydatepicker	= function(type)
 		{
 			//Time picker part.
 			var dp_time		= $("<div>").attr("id","dp_time").appendTo(dp_body);
-			var time_hour	= $("<div>").attr("id","dp_time_hour").appendTo(dp_time);
-			var time_mins	= $("<div>").attr("id","dp_time_mins").appendTo(dp_time);
-			var time_ampm	= $("<div>").attr("id","dp_time_ampm").appendTo(dp_time);
+			var time_hour	= $("<select>").attr("id","dp_time_hour").css({"height":"25px","padding":"0","padding-left":"10px"}).addClass('form-control col-lg-4').appendTo(dp_time);
+			var time_mins	= $("<select>").attr("id","dp_time_mins").css({"height":"25px","padding":"0","padding-left":"10px"}).addClass('form-control col-lg-4').appendTo(dp_time);
+			var time_ampm	= $("<select>").attr("id","dp_time_ampm").css({"height":"25px","padding":"0","padding-left":"10px"}).addClass('form-control col-lg-4').appendTo(dp_time);
 
 			prepareTimePicker();
 		}
@@ -134,38 +134,64 @@ $.fn.mydatepicker	= function(type)
 		for(var i=0;i<12;i++)
 		{
 			var labelH	= i == 0?12:i;
-			var div		= $("<div>").attr({"id":"dp_hour_"+i,"data-hour":i}).html(labelH).appendTo($("#dp_time_hour"));
+			var div		= $("<option>").attr({"id":"dp_hour_"+i,"data-hour":i}).html(labelH).appendTo($("#dp_time_hour"));
 
 			div.attr("class",nonrealH == i?"dp_time_selected":"dp_time_unselected");
-			div.click(function()
+			if(nonrealH == i){
+				div.attr("selected","selected");
+			}
+
+			/*div.click(function()
 			{
+				console.log("asdasd");
 				selectTime("hour",$(this).attr("data-hour"));
-			});
+			});*/
+
 		}
+		$("#dp_time").change(function()
+		{
+			selectTime("hour",$("#dp_time option:selected").attr("data-hour"));
+		});
 
 		//mins.
 		for(var i=0;i<60;i++)
 		{
-			var div		= $("<div>").attr({"id":"dp_mins_"+i,"data-mins":i}).html(i).appendTo($("#dp_time_mins"));
+			var div		= $("<option>").attr({"id":"dp_mins_"+i,"data-mins":i}).html(i).appendTo($("#dp_time_mins"));
 
 			div.attr("class",mins == i?"dp_time_selected":"dp_time_unselected");
-			div.click(function()
+			if(mins == i){
+				div.attr("selected","selected");
+			}
+			/*div.click(function()
 			{
 				selectTime("mins",$(this).attr("data-mins"));
-			})
+			})*/
+
 		}
+		$("#dp_time_mins").change(function()
+		{
+			selectTime("mins",$("#dp_time_mins option:selected").attr("data-mins"));
+		});
 
 		//ampm
 		var ampmR	= ["AM","PM"];
 		for(var i in ampmR)
 		{
-			var div		= $("<div>").attr({"id":"dp_ampm_"+i,"data-ampm":i}).html(ampmR[i]).appendTo($("#dp_time_ampm"));
+			var div		= $("<option>").attr({"id":"dp_ampm_"+i,"data-ampm":i}).html(ampmR[i]).appendTo($("#dp_time_ampm"));
 			div.attr("class",ampmCheck == ampmR[i]?"dp_time_selected":"dp_time_unselected");
-			div.click(function()
+			if(ampmCheck == ampmR[i]){
+				div.attr("selected","selected");
+			}
+			/*div.click(function()
 			{
 				selectTime("ampm",$(this).attr("data-ampm"));
-			})
+			})*/
+
 		}
+		$("#dp_time_ampm").change(function()
+		{
+			selectTime("ampm",$("#dp_time_ampm option:selected").attr("data-ampm"));
+		});
 	}
 
 	var prepareHeader = function()
@@ -294,7 +320,7 @@ $.fn.mydatepicker	= function(type)
 		setHeader(type,val);
 		$("#dp_date .dp_date_selected").attr("class","dp_date_unselected");
 		$("#dp_middle_"+val).attr("class","dp_date_selected");
-
+console.log('1')
 		setInput();
 		//go back to middle = days.
 		if(type == "month" || type == "year")
@@ -328,8 +354,8 @@ $.fn.mydatepicker	= function(type)
 	{
 		$("#dp_time_"+h+" > .dp_time_selected").attr("class","dp_time_unselected");
 		$("#dp_"+h+"_"+v).attr("class","dp_time_selected");
-
-		setInput();
+		console.log('2')
+		//setInput();
 	}
 
 	var setInput		= function()
@@ -353,10 +379,14 @@ $.fn.mydatepicker	= function(type)
 		}
 
 		$(input).val(type == 1?dateVal:(type == 2?timeVal:dateVal+" "+timeVal));
+		//input.parent().parent().data('id')
+		name=input.data('id')
+		$("."+name).prepend('<div><input type="hidden" name="'+name+'[]" value="'+(type == 1?dateVal:(type == 2?timeVal:dateVal+" "+timeVal))+'"><span class="selected-time">'+(type == 1?dateVal:(type == 2?timeVal:dateVal+" "+timeVal))+'</span><img style="width:10px; height:10px;" class="deleteinp" src="img/cancel.png"></div>')
 	}
 
 	var closeDatepicker = function()
 	{
+		console.log('3')
 		setInput();
 		$("#dp_wrapper").slideUp(function()
 		{

@@ -381,11 +381,44 @@ Twitter.prototype.sendMessage = function (user_id, text_message, fun) {
     );
 }
 
+
+function asyncLoop (iterations, func, callback) {
+    var index = 0;
+    var done = false;
+    var loop = {
+        next: function() {
+            if (done) {
+                return;
+            }
+            if (index < iterations) {
+                index++;
+                func(loop);
+
+            } else {
+                done = true;
+                callback();
+            }
+        },
+
+        iteration: function() {
+            return index - 1;
+        },
+
+        break: function() {
+            done = true;
+            callback();
+        }
+    };
+    loop.next();
+    return loop;
+}
+
 Twitter.prototype.makeTweet = function (text_tweet,image_url, fun) {
-    //console.log(typeof image_url)
-    el=this;
-    if(typeof image_url=="function"||typeof image_url=='undefined'){
-        image_url=fun;
+    console.log('type of image url ', typeof (image_url));
+    console.log(' image url ', image_url);
+    el = this;
+    if (typeof image_url == "function" || typeof image_url == 'undefined') {
+        image_url = fun;
         el.cb.__call(
             "statuses_update",
             {
@@ -396,34 +429,48 @@ Twitter.prototype.makeTweet = function (text_tweet,image_url, fun) {
                 fun(reply, rate, err);
             }
         );
-    }else{
-        convertURLToBase64(image_url,function(data){
-            //console.log(data);
+    }
+    else {
+        ids = [];
+        key = 0;
+        asyncLoop(image_url.length, function (loop) {
+            convertURLToBase64(image_url[key], function (data) {
+                el.cb.__call(
+                    "media_upload",
+                    {"media": data},
+                    function (reply, rate, err) {
+                        console.log('reply', reply);
+                        alert("rrrrr");
+                        ids.push(reply.media_id_string);
+                        key++;
+                        loop.next();
+                    }
+                );
+                // key++;
+                // loop.next();
+            }); /* convert url base 64*/
+        }, function () {
+
+            console.log(ids);
+            console.log('splict ',ids.join(","));
             el.cb.__call(
-                "media_upload",
-                {"media":data},
+                "statuses_update",
+                {
+
+                    "media_ids": ids.join(","),
+                    "status": text_tweet
+                },
                 function (reply, rate, err) {
-                    console.log(reply);
-                    console.log(rate);
-                    console.log(err);
-                    el.cb.__call(
-                        "statuses_update",
-                        {
-                            "media_ids": reply.media_id_string,
-                            "status": text_tweet
-                        },
-                        function (reply, rate, err) {
-                            // ...
-                            fun(reply, rate, err);
-                        }
-                    );
+                    // ...
+                    //console.log(reply)
+                    fun(reply, rate, err);
                 }
             );
         });
+
     }
+
 }
-
-
 
 /*==================================================================================*/
 //var URL = location.protocol + "//" + location.host + '/';
