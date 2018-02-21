@@ -331,6 +331,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
 
         Illuminate\View\ViewServiceProvider::class,
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
 
 
 
@@ -375,6 +376,7 @@ return [
         //laravel/socialite
 
         Laravel\Socialite\SocialiteServiceProvider::class,
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
 
     ],
 
@@ -485,10 +487,10 @@ return [
         //laravel/socialite
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
 
     ],
 
 
 
 ];
-

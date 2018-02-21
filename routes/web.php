@@ -29,6 +29,11 @@
    dd(DB::select('ALTER TABLE `app_users_posts_resources`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;'));
 });*/
+
+Route::get('/testCron', 'CronController@getScheduledPosts');
+
+
+
 Route::get('/termsAndConditions', 'HomeController@termsAndConditions');
 Route::get('/support', 'HomeController@support');
 Route::get('/privacy', 'HomeController@privacy');
@@ -48,7 +53,7 @@ Route::post('/register','HomeController@registerPost');
 Route::get('/login/{type}', 'HomeController@socialLogin');
 Route::get('/{type}/callback', 'HomeController@socialLoginCallback');
 Route::post('timeZone', 'HomeController@timeZone');
-    
+
 Route::get('signup', 'HomeController@signup');
 
 Route::post('register', 'HomeController@register');
@@ -80,8 +85,8 @@ Route::post('register', 'HomeController@register');
     Route::post('addNewProfile', 'HomeController@addNewProfile');
     Route::post('searchProfile', 'HomeController@searchProfile');
     Route::post('addPost', 'HomeController@addPost');
-    
-    
+
+
 
     Route::post('/updatepost/{id}', 'HomeController@updatepost');
 
@@ -101,8 +106,8 @@ Route::get('getaccesstokenTwitter/{page_id}', 'twitterController@getaccesstoken'
 
     //Route::post('saveTokenNumber', 'HomeController@saveTokenNumber');
 
-	
-	
+
+
   // fathi start route
 Route::get('/facebook_csvFile', 'uploadcsvFacebookController@csvPage');
 Route::get('/publishPosts', 'statusController@publishPosts');
@@ -144,4 +149,3 @@ Route::group(['middleware' => 'PermissionsAuth'], function () {
         /*end app_users routes*/
     });
 });
-

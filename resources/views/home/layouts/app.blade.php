@@ -973,9 +973,7 @@ function authorize(response) {
   function onLinkedInLoad() {
    IN.Event.on(IN, "auth", getProfileData);
   }
-convertURLToBase64("http://localhost:8000/img/resources/2018/02/14/resources_7544_1518614188.jpg", function (data) {
-console.log('data',data);
-})
+  
    function getProfileData() {
        console.log('testtttt');
        console.log("oauth token:" + IN.ENV.auth.oauth_token);
@@ -1003,8 +1001,8 @@ console.log('data',data);
                    }
                    //console.log('done');
                }
-               if(companies._total){
-                   console.log(companies);
+               if(companies){
+                   //console.log(companies);
                    companies.values.forEach(function(company){
                        //console.log(company)
                        htmly+='<input type="hidden" id="linkedinid" value="'+company.id+'">';
@@ -1026,7 +1024,6 @@ console.log('data',data);
        });
    }
 function liAuth(){
-    alert("in linkedin");
    IN.User.authorize(function(){
      //  callback();
    });

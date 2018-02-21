@@ -1552,11 +1552,6 @@ $(document).on('click','#postButton',function(){
                         publish=1;
                         console.log(page_id,message,scheduleDate,picture_url);
                         bodyRequest = {
-                            "content":{
-                                "submitted-image-url":picture_url,
-                                "submitted-url":picture_url,
-                                "title":message
-                            },
                             "comment": message,
                             "visibility": {
                                 "code": "anyone"
@@ -1824,6 +1819,8 @@ $(document).on('click','#postButton',function(){
                 scheduleDate = $('.schedule').attr('date-time');
                 categoryid=$('#categoryid').val();
                 scheduleDateTime = $('.schedule').attr('date-scheduleDateTime');
+                resource_id=(typeof resource_id=='undefined')?0:resource_id;
+
                 if(typeof scheduleDateTime=='undefined'){
                     newDate=new Date();
                     scheduleDateTime=newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate()+' '+newDate.getHours()+':'+newDate.getMinutes();
@@ -1899,8 +1896,8 @@ $(document).on('click','#postButton',function(){
                                 "scheduleDateTime": scheduleDateTime,
                                 "category_id":categoryid,
                                 "post_id": '0',
-                                "resource_id":resource_id,
-                                "picture_url": picture_url,
+                                "resource_id":resource_ids,
+                                "picture_url": picture_urls,
                                 _token: token
                             },
                             success: function (msg) {

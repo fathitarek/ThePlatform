@@ -134,7 +134,7 @@ class HomeController extends Controller
                // 'phone_number'=>'required|unique:app_users,phone',
                 'password'=>'required',
             ));
-     
+
         if ($validator->fails()) {
         $message='<ul class="signupp">';
             foreach($validator->errors()->all() as $error){
@@ -155,9 +155,9 @@ class HomeController extends Controller
     $app_users->active='1';
     if($app_users->save()){
 $app_users->save();
-    
+
     return Redirect::to('/login');
-                
+
 }
 }
 }
@@ -317,14 +317,14 @@ return redirect('/my_categories');
     }
   public function mycat(){
      $categories = Category::with('CategoryPlans')->where('user_id', Auth::guard('AppUsers')->user()->id)->get();
-     return view('home.mycat',compact('categories'));    
+     return view('home.mycat',compact('categories'));
     }
-public function editcategory($id){  
+public function editcategory($id){
      $category =Category::where('id', $id)->first();
-     return view('home.editcat',compact('category'));    
+     return view('home.editcat',compact('category'));
 }
-public function updatecategory(Request $request,$id){    
-    
+public function updatecategory(Request $request,$id){
+
 CategoryPlans::where('category_id', '=', $id)->delete();
 $idcat=$id;
 if(isset($request->sun)){
@@ -437,7 +437,7 @@ category::where('id', $id)->update([
 ]);
    return Redirect::back();
     }
-public function deletecategory($id){  
+public function deletecategory($id){
 Category::where('id', '=', $id)->delete();
 CategoryPlans::where('category_id', '=', $id)->delete();
    return Redirect::back();
@@ -891,7 +891,7 @@ $userposts=AppUsersPosts::where([
         }
         return response()->json(['message'=>Lang::get('home.success'),'success'=>true,'html'=>$html])->setCallback($request->input('callback'));
     }
-  
+
 //update publish ------------ islam -----------
 public function updatepost(Request $request,$id){
 AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->post_id , 'resource_id' => $request->resource_id]);
@@ -901,9 +901,11 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
         return response()->json(['success'])->header('Access-Control-Allow-Origin', '*')->setCallback($request->input('callback'));
     }
     public function cron(){
-        return view('home.publisheposts');
+
+
+      //  return view('home.publisheposts');
     }
-    
+
      public function cron2(){
       $url = "http://social.al-moasher.net/cron";
         // sendRequest
@@ -915,7 +917,7 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
         $body = curl_exec($ch);
         echo $body;
         curl_close($ch);
-        
+
         // now, process the JSON string
         $json = json_decode($body);
     }
@@ -929,7 +931,7 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
          return response()->json($userposts)->header('Access-Control-Allow-Origin', '*')->setCallback($request->input('callback'));
         return view('home.scheduled_posts',compact('userposts'));
     }
-    
+
        public function addPost(Request $request){
 
 
@@ -952,7 +954,7 @@ AppUsersPosts::where('id', $id)->update(['publish' => 1, 'post_id' => $request->
             $messages.='</ul>';
             return response()->json(['message'=>$messages,'success'=>false])->setCallback($request->input('callback'));
         }else{
-        /*    
+        /*
            if(isset($data['category_id'])){
             $appPosts=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->orderBy('id', 'DESC')->first();
             $planid=CategoryPlans::select('id')->where('category_id',$data['category_id'])->orderBy('id')->pluck('id')->toArray();
@@ -965,7 +967,7 @@ if(isset($data['category_id'])){
         $lastt_post=$appPosts->lastedit_by;
         $key = array_search($lastt_post, $planid);
     if(isset($planid[$key+1])){
-    $scheduledpost=$appcategory[$key+1]; 
+    $scheduledpost=$appcategory[$key+1];
     $scheduledday=$appcategoryday[$key+1];
     $date = new DateTime();
     $date->modify('next '.$scheduledday);
@@ -978,7 +980,7 @@ $date->modify('+'.$minus.' week');  $finalschedule = $date->format('Y-m-d');
   $finalschedule.=' '.$scheduledpost;
 }
 }else{
-    $scheduledpost=$appcategory[0]; 
+    $scheduledpost=$appcategory[0];
     $scheduledday=$appcategoryday[0];
     $start=0;
     $date = new DateTime();
@@ -992,7 +994,7 @@ $date->modify('+'.$checkdate.' week');
 }else{
 $minus=$checkdate-1;
 $date->modify('+'.$minus.' week');
- } 
+ }
   $finalschedule = $date->format('Y-m-d');
   $finalschedule.=' '.$scheduledpost;
 
@@ -1001,10 +1003,10 @@ $date->modify('+'.$minus.' week');
 }
     }else{
 for($i = 0; $i < count($planid); $i++) {
-    $scheduledpost=$appcategory[$i]; 
+    $scheduledpost=$appcategory[$i];
     $scheduledday=$appcategoryday[$i];
     $date = new DateTime();
-    $today = date("l"); 
+    $today = date("l");
 if (strcasecmp($today, $scheduledday) == 0) {
 }else{
     $date->modify('next '.$scheduledday);
@@ -1018,12 +1020,12 @@ $today = date("Y-m-d H:i");
       //  $interval[$count] = abs(strtotime($date) - strtotime($day));
         $interval[] = abs(strtotime($today) - strtotime($onefulltime));
     //    $count++;
-        
+
     }
     asort($interval);
     $closest = key($interval);
     $mostRecent= $fulltime[$closest];
-    
+
 //  $scheduledpost=$appcategory[0];
 //  $scheduledday=$appcategoryday[0];
     }
@@ -1038,7 +1040,7 @@ $today = date("Y-m-d H:i");
                 $appUserPosts->post_id=$data['post_id'];
                 $appUserPosts->resource_id=$data['resource_id'];
                 $appUserPosts->message=$data['message'];
-                if(isset($data['category_id'])){              
+                if(isset($data['category_id'])){
                 $appUserPosts->category_id=$data['category_id'];
                 }
 if(isset($start)){
@@ -1073,10 +1075,10 @@ else if(isset($key)){
     $appUserPage=AppUsersPages::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('page_id',$data['page_id'])->first();
 
         //1- get last post to category (date , plane time)
- 
+
         if(isset($data['category_id'])){
             $appPosts=AppUsersPosts::where('app_user_id',Auth::guard('AppUsers')->user()->id)->where('publish',0)->where('page_id',$data['page_id'])->where('category_id',$data['category_id'])->orderBy('id', 'DESC')->first();
-        
+
 
         //2- get scheduale category plan by date (id ,Date )
         $category_id= $data['category_id'];
@@ -1089,20 +1091,20 @@ $lastpostdate=$today;
         $lastplanid=0;
 
 
-}else{        
+}else{
 
 
     $lastpostdate=$appPosts->created_time;
-    
+
      $lastplanid=$appPosts->lastedit_by;
-      } 
-     
+      }
+
 $searchtime=$lastpostdate;
 ///$searchtime=date("Y-m-d",strtotime($searchtime));
 //$searchtime=date("Y-m-d H:i",strtotime($searchtime));
 
 echo $searchtime;
-    start : 
+    start :
 $lastpostdate=date("Y-m-d",strtotime($lastpostdate));
 /*    $category1 = DB::table('category_plan')
      //->join('app_users_profiles', 'app_users_profiles.app_user_id', '=', 'app_users.id')
@@ -1122,9 +1124,9 @@ echo $category1;*/
      ->where(DB::raw("DATE_ADD(concat('$lastpostdate',' ',`time`), INTERVAL(doweek-1-DAYOFWEEK('$lastpostdate')) DAY)"),'>',$searchtime)
      ->orderBy('schedule_date','ASC')->orderBy('id','ASC')
      ->get();
- 
+
  echo  $category;
- 
+
       //3- get  planid index from $category array
  foreach($category as $categoryid){
 
@@ -1145,7 +1147,7 @@ var_dump($schedule_dates);
 echo $schedule_dates[$nextindex];
 */
 
-        
+
 
  //4- get next index  if found return if not add to curret date 1 week and go to start
 $nextindex=$key+1;
@@ -1169,7 +1171,7 @@ goto start;
 }
  //
 
- //5- add post 
+ //5- add post
 
  if(count($appUserPage)){
                 $appUserPosts=new AppUsersPosts();
@@ -1181,7 +1183,7 @@ goto start;
                 $appUserPosts->post_id=$data['post_id'];
                 $appUserPosts->resource_id=(isset($data['resource_ids'][0]))?$data['resource_ids'][0]:0;
                 $appUserPosts->message=$data['message'];
-                if(isset($data['category_id'])){              
+                if(isset($data['category_id'])){
                 $appUserPosts->category_id=$data['category_id'];
                 }
 
