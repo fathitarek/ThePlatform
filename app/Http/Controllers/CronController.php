@@ -13,6 +13,16 @@ class CronController extends Controller {
 
     /**
      * 
+     * @param type $id
+     * @return type
+     */
+    public function updatePost($id) {
+        $post_update = AppUsersPosts::where('id', $id)->update(array('publish' => 1));
+        return $post_update;
+    }
+
+    /**
+     * 
      * @param type $fb
      * @param type $pageId
      * @param type $Data
@@ -53,7 +63,6 @@ class CronController extends Controller {
         $scheduled_posts = AppUsersPosts::latest()->where('app_user_page_id', '12')->where('publish', 0)->get();
         foreach ($scheduled_posts as $value) {
             $Data = ['message' => $value->message,];
-
             $AppUsersPages = AppUsersPages::latest()->where('page_id', $value->page_id)->first();
             $pageAccessToken = $this->getPageAccessToken($fb, $AppUsersPages->oauth_token, $value->page_id);
             if ($value->resource_id && $value->resource_id > 0) {
@@ -62,8 +71,8 @@ class CronController extends Controller {
                     $linkData = ['url' => []];
                     $images = array();
                     $resoucers = Resources::oldest()->where('id', $resource->resource_id)->get();
-                    $img = ['url' => 'https://newrelic.com/assets/pages/apm/php/php-elephant-logo-bd4f9d83be8c8563248fe4793f90bae7.png', 'published' => false];
-                    //$img = ['url' => URL('') . $resoucers[0]->resource_dir . $resoucers[0]->resource, 'published' => false];
+                    //$img = ['url' => 'https://static.pexels.com/photos/34950/pexels-photo.jpg', 'published' => false];
+                    $img = ['url' => URL('') . $resoucers[0]->resource_dir . $resoucers[0]->resource, 'published' => false];
                     $response = $fb->post('/' . $value->page_id . '/photos', $img, $pageAccessToken);
                     //var_dump($response->getGraphUser()->getId());
                     array_push($images, $response->getGraphUser()->getId());
@@ -77,7 +86,9 @@ class CronController extends Controller {
             } else {
                 $this->postOnFacebook($fb, $value->page_id, $Data, $pageAccessToken);
             }//end if resources
-        }
+
+            $this->updatePost($value->id);
+        }//end for on schedule posts
     }
 
 }

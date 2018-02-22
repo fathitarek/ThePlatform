@@ -30,7 +30,7 @@
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;'));
 });*/
 
-Route::get('/testCron', 'CronController@getScheduledPosts');
+Route::get('/testCron', 'CronController@getScheduledPosts333');
 
 
 
