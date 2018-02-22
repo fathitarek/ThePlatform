@@ -16,8 +16,8 @@ class CronController extends Controller {
      * @param type $id
      * @return type
      */
-    public function updatePost($id) {
-        $post_update = AppUsersPosts::where('id', $id)->update(array('publish' => 1));
+    public function updatePost($id, $post_id) {
+        $post_update = AppUsersPosts::where('id', $id)->update(array('publish' => 1, 'post_id' => $post_id));
         return $post_update;
     }
 
@@ -31,6 +31,7 @@ class CronController extends Controller {
     public function postOnFacebook($fb, $pageId, $Data, $pageAccessToken) {
         try {
             $response = $fb->post('/' . $pageId . '/feed', $Data, $pageAccessToken);
+            return $response->getGraphUser()->getId();
         } catch (Facebook\Exceptions\FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -61,6 +62,7 @@ class CronController extends Controller {
      */
     public function getScheduledPosts(LaravelFacebookSdk $fb) {
         $scheduled_posts = AppUsersPosts::latest()->where('app_user_page_id', '12')->where('publish', 0)->get();
+        // return  $scheduled_posts;
         foreach ($scheduled_posts as $value) {
             $Data = ['message' => $value->message,];
             $AppUsersPages = AppUsersPages::latest()->where('page_id', $value->page_id)->first();
@@ -71,8 +73,8 @@ class CronController extends Controller {
                     $linkData = ['url' => []];
                     $images = array();
                     $resoucers = Resources::oldest()->where('id', $resource->resource_id)->get();
-                    //$img = ['url' => 'https://static.pexels.com/photos/34950/pexels-photo.jpg', 'published' => false];
-                    $img = ['url' => URL('') . $resoucers[0]->resource_dir . $resoucers[0]->resource, 'published' => false];
+                    $img = ['url' => 'https://static.pexels.com/photos/34950/pexels-photo.jpg', 'published' => false];
+                    // $img = ['url' => URL('') . $resoucers[0]->resource_dir . $resoucers[0]->resource, 'published' => false];
                     $response = $fb->post('/' . $value->page_id . '/photos', $img, $pageAccessToken);
                     //var_dump($response->getGraphUser()->getId());
                     array_push($images, $response->getGraphUser()->getId());
@@ -80,14 +82,13 @@ class CronController extends Controller {
                     for ($i = 0; $i < count($images); $i++) {
                         array_push($Data, $Data["attached_media[" . $i . "]"] = "{'media_fbid':'$images[$i]'}");
                     }
-                    $this->postOnFacebook($fb, $value->page_id, $Data, $pageAccessToken);
+                    $postOnFacebook = $this->postOnFacebook($fb, $value->page_id, $Data, $pageAccessToken);
                 }
-                exit();
+                // exit();
             } else {
-                $this->postOnFacebook($fb, $value->page_id, $Data, $pageAccessToken);
+                $postOnFacebook = $this->postOnFacebook($fb, $value->page_id, $Data, $pageAccessToken);
             }//end if resources
-
-            $this->updatePost($value->id);
+            $this->updatePost($value->id, $postOnFacebook);
         }//end for on schedule posts
     }
 
